@@ -620,20 +620,21 @@ function Dashboard({holdings,history,prices,exchRate,cashUSD,cashKRW,setCashUSD,
 }
 
 // ════════════════════════════════════════════════════
-// 포트폴리오
+// 포트폴리오 (엑셀형 인라인 편집)
 // ════════════════════════════════════════════════════
 function Portfolio({holdings,setHoldings,prices,exchRate}){
-  const [showModal,setShowModal]=useState(false);
-  const [editItem,setEditItem]=useState(null);
-  const [itab,setItab]=useState('holdings');
+  const [editCell,setEditCell]=useState({id:null,field:null});
+  const [editVal,setEditVal]=useState('');
+  const [showAdd,setShowAdd]=useState(false);
   const [form,setForm]=useState({ticker:'',name:'',type:'stock-us',investAmount:'',avgCost:'',targetPct:'',sector:'미국주식'});
   const [priceLoading,setPriceLoading]=useState(false);
+  const [itab,setItab]=useState('table');
+  const inputRef=useRef();
 
   const rows=useMemo(()=>{
     const total=holdings.reduce((s,h)=>{
       const p=prices[h.ticker]?.price||h.avgCost;
-      const qty=h.investAmount/h.avgCost;
-      return s+p*qty;
+      return s+(p*(h.investAmount/h.avgCost));
     },0);
     return holdings.map(h=>{
       const curPrice=prices[h.ticker]?.price||h.avgCost;
@@ -641,21 +642,67 @@ function Portfolio({holdings,setHoldings,prices,exchRate}){
       const curVal=curPrice*qty;
       const pnl=curVal-h.investAmount;
       const pnlPct=(pnl/h.investAmount)*100;
-      const realPct=(curVal/total)*100;
+      const realPct=total>0?(curVal/total)*100:0;
       const diff=realPct-h.targetPct;
+      // 추가매수/매도 계산: 목표비중에 맞추려면 얼마나 사야/팔아야 하는지
+      const targetVal=(total*h.targetPct/100);
+      const needAmt=targetVal-curVal; // 양수=매수필요, 음수=매도필요
+      const needQty=needAmt/curPrice;
       const chg=prices[h.ticker]?((prices[h.ticker].price-prices[h.ticker].prev)/prices[h.ticker].prev*100):null;
-      return{...h,curPrice,qty,curVal,pnl,pnlPct,realPct,diff,chg,total};
+      return{...h,curPrice,qty,curVal,pnl,pnlPct,realPct,diff,needAmt,needQty,chg,total};
     });
   },[holdings,prices]);
 
   const totalTarget=holdings.reduce((s,h)=>s+h.targetPct,0);
 
-  const openAdd=()=>{setEditItem(null);setForm({ticker:'',name:'',type:'stock-us',investAmount:'',avgCost:'',targetPct:'',sector:'미국주식'});setShowModal(true);};
-  const openEdit=h=>{setEditItem(h);setForm({ticker:h.ticker,name:h.name,type:h.type,investAmount:String(h.investAmount),avgCost:String(h.avgCost),targetPct:String(h.targetPct),sector:h.sector});setShowModal(true);};
+  // 셀 클릭 → 인라인 편집 시작
+  const startEdit=(id,field,val)=>{
+    setEditCell({id,field});
+    setEditVal(String(val));
+    setTimeout(()=>inputRef.current?.focus(),30);
+  };
+
+  // 편집 완료 → 저장
+  const commitEdit=(id,field)=>{
+    setHoldings(h=>h.map(x=>{
+      if(x.id!==id)return x;
+      const v=parseFloat(editVal)||0;
+      return{...x,[field]:v};
+    }));
+    setEditCell({id:null,field:null});
+  };
+
+  const handleKeyDown=(e,id,field)=>{
+    if(e.key==='Enter')commitEdit(id,field);
+    if(e.key==='Escape')setEditCell({id:null,field:null});
+  };
+
+  // 인라인 편집 셀 렌더
+  const Cell=({id,field,value,display,align='right',color})=>{
+    const isEditing=editCell.id===id&&editCell.field===field;
+    if(isEditing)return(
+      <td className={align==='right'?'tr':''}>
+        <input ref={inputRef} type="number" value={editVal}
+          onChange={e=>setEditVal(e.target.value)}
+          onBlur={()=>commitEdit(id,field)}
+          onKeyDown={e=>handleKeyDown(e,id,field)}
+          style={{width:'100%',padding:'4px 6px',fontSize:12,border:'2px solid var(--accent)',borderRadius:4,textAlign:'right',background:'#fffdf9'}}/>
+      </td>
+    );
+    return(
+      <td className={`${align==='right'?'tr':''} mono`}
+        style={{cursor:'pointer',color:color||'inherit'}}
+        onClick={()=>startEdit(id,field,value)}
+        title="클릭하여 수정">
+        {display||value}
+      </td>
+    );
+  };
+
+  const del=id=>{if(confirm('삭제하시겠어요?'))setHoldings(h=>h.filter(x=>x.id!==id));};
 
   const handleTickerSelect=(ticker,info)=>{
     setForm(f=>({...f,ticker,name:info.name,type:info.type,sector:info.sector}));
-    // 현재가 자동 조회
     setPriceLoading(true);
     fetchYahooPrice(ticker).then(r=>{
       if(r)setForm(f=>({...f,avgCost:String(Math.round(r.price))}));
@@ -665,95 +712,155 @@ function Portfolio({holdings,setHoldings,prices,exchRate}){
 
   const saveItem=()=>{
     if(!form.ticker||!form.name||!form.investAmount||!form.avgCost)return;
-    const item={ticker:form.ticker,name:form.name,type:form.type,investAmount:parseFloat(form.investAmount)||0,avgCost:parseFloat(form.avgCost)||0,targetPct:parseFloat(form.targetPct)||0,sector:form.sector};
-    if(editItem)setHoldings(h=>h.map(x=>x.id===editItem.id?{...x,...item}:x));
-    else setHoldings(h=>[...h,{...item,id:Date.now()}]);
-    setShowModal(false);
+    const item={ticker:form.ticker,name:form.name,type:form.type,
+      investAmount:parseFloat(form.investAmount)||0,
+      avgCost:parseFloat(form.avgCost)||0,
+      targetPct:parseFloat(form.targetPct)||0,
+      sector:form.sector};
+    setHoldings(h=>[...h,{...item,id:Date.now()}]);
+    setShowAdd(false);
+    setForm({ticker:'',name:'',type:'stock-us',investAmount:'',avgCost:'',targetPct:'',sector:'미국주식'});
   };
 
-  const del=id=>{if(confirm('삭제하시겠어요?'))setHoldings(h=>h.filter(x=>x.id!==id));};
-
+  // 섹터별 그룹
   const sectors={};
   rows.forEach(r=>{(sectors[r.sector]||(sectors[r.sector]=[])).push(r);});
 
   return(
     <div className="page">
       <div className="itabs">
-        {['holdings','sector'].map(t=>(
-          <button key={t} className={`itab ${itab===t?'active':''}`} onClick={()=>setItab(t)}>
-            {t==='holdings'?'종목별':'섹터별'}
-          </button>
+        {[['table','📊 종목 테이블'],['sector','🗂 섹터별']].map(([t,l])=>(
+          <button key={t} className={`itab ${itab===t?'active':''}`} onClick={()=>setItab(t)}>{l}</button>
         ))}
       </div>
 
-      {itab==='holdings'&&(
+      {itab==='table'&&(
         <>
           <div className="flexb mb14">
             <div>
               <div className="section-title">보유 종목 ({holdings.length})</div>
-              <div style={{fontSize:10,color:totalTarget!==100?'var(--up)':'var(--text3)',marginTop:2}}>
-                목표 합계 {totalTarget}% {totalTarget!==100&&'⚠️ 100% 아님'}
+              <div style={{fontSize:10,marginTop:2,color:Math.abs(totalTarget-100)<0.1?'var(--text3)':'var(--up)'}}>
+                목표비중 합계 {totalTarget.toFixed(1)}% {Math.abs(totalTarget-100)>0.1&&'⚠️ 100% 아님'}
+                <span style={{marginLeft:8,color:'var(--text3)'}}>· 셀 클릭하면 바로 수정 가능</span>
               </div>
             </div>
-            <button className="btn btn-primary" onClick={openAdd}>+ 종목 추가</button>
+            <button className="btn btn-primary" onClick={()=>setShowAdd(true)}>+ 종목 추가</button>
           </div>
-          <div className="card">
+
+          <div className="card" style={{padding:0,overflow:'hidden'}}>
             <div className="tbl-wrap">
               <table>
                 <thead>
                   <tr>
-                    <th>종목</th><th>구분</th>
-                    <th className="tr">현재가</th><th className="tr">평균단가</th>
-                    <th className="tr">투자금액</th><th className="tr">평가금액</th>
-                    <th className="tr">손익</th><th className="tr">오늘</th>
-                    <th className="tr">실제%</th><th className="tr">목표%</th>
-                    <th className="tr">괴리</th><th></th>
+                    <th style={{minWidth:140}}>종목</th>
+                    <th>섹터</th>
+                    <th className="tr" style={{minWidth:55}}>목표%</th>
+                    <th className="tr" style={{minWidth:55}}>실제%</th>
+                    <th className="tr" style={{minWidth:100}}>투자금액</th>
+                    <th className="tr" style={{minWidth:100}}>평균단가</th>
+                    <th className="tr" style={{minWidth:100}}>현재가</th>
+                    <th className="tr" style={{minWidth:100}}>평가금액</th>
+                    <th className="tr" style={{minWidth:90}}>손익금액</th>
+                    <th className="tr" style={{minWidth:60}}>손익%</th>
+                    <th className="tr" style={{minWidth:55}}>오늘</th>
+                    <th style={{minWidth:160,background:'#f0e8ff',color:'#6c3483'}}>추가매수/매도</th>
+                    <th></th>
                   </tr>
                 </thead>
                 <tbody>
                   {rows.map(r=>(
-                    <tr key={r.id}>
+                    <tr key={r.id} style={{borderLeft:r.pnl>=0?'3px solid var(--up-bg)':'3px solid var(--down-bg)'}}>
+                      {/* 종목명 - 편집불가 */}
                       <td>
                         <div className="flex gap8">
                           <span className="ticker-chip">{r.ticker}</span>
-                          <span style={{fontWeight:600,fontSize:12}}>{r.name}</span>
-                        </div>
-                      </td>
-                      <td><span className={`type type-${r.type}`}>{r.type==='stock-kr'?'KR':r.type==='stock-us'?'US':r.type.toUpperCase()}</span></td>
-                      <td className="tr mono">{prices[r.ticker]?fmtKRW(r.curPrice):<span style={{color:'var(--text3)'}}>-</span>}</td>
-                      <td className="tr mono">{fmtKRW(r.avgCost)}</td>
-                      <td className="tr mono">{fmtKRW(r.investAmount)}</td>
-                      <td className="tr mono" style={{fontWeight:700}}>{fmtKRW(r.curVal)}</td>
-                      <td className="tr">
-                        <div className={r.pnl>=0?'up':'down'}>{fmtKRW(r.pnl)}</div>
-                        <span className={`badge ${r.pnl>=0?'badge-up':'badge-down'}`}>{fmtPct(r.pnlPct)}</span>
-                      </td>
-                      <td className="tr">
-                        {r.chg!==null?<span className={`badge ${r.chg>=0?'badge-up':'badge-down'}`}>{fmtPct(r.chg)}</span>:<span style={{color:'var(--text3)',fontSize:11}}>-</span>}
-                      </td>
-                      <td className="tr">
-                        <div className="flex" style={{justifyContent:'flex-end',gap:5}}>
-                          <div className="prog-wrap" style={{width:40}}>
-                            <div className="prog-fill" style={{width:`${Math.min(r.realPct/40*100,100)}%`,background:'var(--accent)'}}/>
+                          <div>
+                            <div style={{fontWeight:600,fontSize:12}}>{r.name}</div>
+                            <span className={`type type-${r.type}`}>{r.type==='stock-kr'?'KR':r.type==='stock-us'?'US':r.type.toUpperCase()}</span>
                           </div>
-                          <span className="mono">{r.realPct.toFixed(1)}%</span>
                         </div>
                       </td>
-                      <td className="tr mono">{r.targetPct}%</td>
+                      {/* 섹터 - 클릭편집 */}
+                      <td style={{cursor:'pointer',fontSize:11,color:'var(--text3)'}}
+                        onClick={()=>startEdit(r.id,'sector',r.sector)}>
+                        {editCell.id===r.id&&editCell.field==='sector'?(
+                          <input ref={inputRef} value={editVal} onChange={e=>setEditVal(e.target.value)}
+                            onBlur={()=>{setHoldings(h=>h.map(x=>x.id===r.id?{...x,sector:editVal}:x));setEditCell({id:null,field:null});}}
+                            onKeyDown={e=>{if(e.key==='Enter'){setHoldings(h=>h.map(x=>x.id===r.id?{...x,sector:editVal}:x));setEditCell({id:null,field:null});}}}
+                            style={{width:80,padding:'3px 5px',fontSize:11,border:'2px solid var(--accent)',borderRadius:4}}/>
+                        ):r.sector}
+                      </td>
+                      {/* 목표비중 - 클릭편집 */}
+                      <Cell id={r.id} field="targetPct" value={r.targetPct} display={`${r.targetPct}%`}/>
+                      {/* 실제비중 - 읽기전용 */}
                       <td className="tr">
-                        <span className={`badge ${Math.abs(r.diff)<2?'badge-neu':r.diff>0?'badge-up':'badge-down'}`}>
-                          {r.diff>0?'+':''}{r.diff.toFixed(1)}%
-                        </span>
+                        <div className="flex" style={{justifyContent:'flex-end',gap:4}}>
+                          <div className="prog-wrap" style={{width:28}}>
+                            <div className="prog-fill" style={{width:`${Math.min(r.realPct/50*100,100)}%`,background:Math.abs(r.diff)<2?'var(--accent)':r.diff>0?'var(--up)':'var(--down)'}}/>
+                          </div>
+                          <span className="mono" style={{fontSize:11}}>{r.realPct.toFixed(1)}%</span>
+                        </div>
+                      </td>
+                      {/* 투자금액 - 클릭편집 */}
+                      <Cell id={r.id} field="investAmount" value={r.investAmount} display={fmtKRW(r.investAmount)}/>
+                      {/* 평균단가 - 클릭편집 */}
+                      <Cell id={r.id} field="avgCost" value={r.avgCost} display={fmtKRW(r.avgCost)}/>
+                      {/* 현재가 - 읽기전용 */}
+                      <td className="tr mono" style={{color:r.chg>=0?'var(--up)':r.chg<0?'var(--down)':'inherit'}}>
+                        {prices[r.ticker]?fmtKRW(r.curPrice):<span style={{color:'var(--text3)',fontSize:11}}>-</span>}
+                      </td>
+                      {/* 평가금액 - 읽기전용 */}
+                      <td className="tr mono" style={{fontWeight:700}}>{fmtKRW(r.curVal)}</td>
+                      {/* 손익금액 */}
+                      <td className="tr">
+                        <span className={r.pnl>=0?'up':'down'}>{fmtKRW(r.pnl)}</span>
+                      </td>
+                      {/* 손익% */}
+                      <td className="tr">
+                        <span className={`badge ${r.pnlPct>=0?'badge-up':'badge-down'}`}>{fmtPct(r.pnlPct)}</span>
+                      </td>
+                      {/* 오늘등락 */}
+                      <td className="tr">
+                        {r.chg!==null?<span className={`badge ${r.chg>=0?'badge-up':'badge-down'}`}>{fmtPct(r.chg)}</span>:<span style={{color:'var(--text3)',fontSize:10}}>-</span>}
+                      </td>
+                      {/* 추가매수/매도 */}
+                      <td style={{background:r.needAmt>0?'#fff8f8':r.needAmt<0?'#f8fbff':'#f9f9f9',minWidth:160}}>
+                        {Math.abs(r.diff)>=1?(
+                          <div style={{fontSize:11,lineHeight:1.7}}>
+                            <div style={{fontWeight:700,color:r.needAmt>0?'var(--up)':'var(--down)'}}>
+                              {r.needAmt>0?'▲ 매수':'▼ 매도'} {fmtKRW(Math.abs(r.needAmt))}
+                            </div>
+                            <div style={{color:'var(--text3)'}}>
+                              ≈ {Math.abs(r.needQty).toFixed(r.type==='crypto'?4:2)}주
+                              <span style={{marginLeft:6,color:r.diff>0?'var(--up)':'var(--down)'}}>
+                                (괴리 {r.diff>0?'+':''}{r.diff.toFixed(1)}%)
+                              </span>
+                            </div>
+                          </div>
+                        ):(
+                          <span style={{fontSize:11,color:'var(--text3)'}}>✅ 균형</span>
+                        )}
                       </td>
                       <td>
-                        <div className="flex gap8">
-                          <button className="btn btn-secondary btn-sm" onClick={()=>openEdit(r)}>수정</button>
-                          <button className="btn btn-danger btn-sm" onClick={()=>del(r.id)}>삭제</button>
-                        </div>
+                        <button className="btn btn-danger btn-sm" onClick={()=>del(r.id)}>삭제</button>
                       </td>
                     </tr>
                   ))}
                 </tbody>
+                {/* 합계 행 */}
+                <tfoot>
+                  <tr style={{background:'var(--bg2)',fontWeight:700}}>
+                    <td colSpan={2} style={{fontSize:12,fontWeight:700}}>합계</td>
+                    <td className="tr mono">{totalTarget.toFixed(1)}%</td>
+                    <td className="tr mono">100%</td>
+                    <td className="tr mono">{fmtKRW(rows.reduce((s,r)=>s+r.investAmount,0))}</td>
+                    <td colSpan={2}></td>
+                    <td className="tr mono">{fmtKRW(rows.reduce((s,r)=>s+r.curVal,0))}</td>
+                    <td className="tr"><span className={rows.reduce((s,r)=>s+r.pnl,0)>=0?'up':'down'}>{fmtKRW(rows.reduce((s,r)=>s+r.pnl,0))}</span></td>
+                    <td className="tr"><span className={`badge ${rows.reduce((s,r)=>s+r.pnl,0)>=0?'badge-up':'badge-down'}`}>{fmtPct(rows.reduce((s,r)=>s+r.pnl,0)/Math.max(rows.reduce((s,r)=>s+r.investAmount,0),1)*100)}</span></td>
+                    <td colSpan={3}></td>
+                  </tr>
+                </tfoot>
               </table>
             </div>
           </div>
@@ -763,27 +870,40 @@ function Portfolio({holdings,setHoldings,prices,exchRate}){
       {itab==='sector'&&Object.entries(sectors).map(([sec,items],si)=>{
         const secVal=items.reduce((s,r)=>s+r.curVal,0);
         const totalAll=rows.reduce((s,r)=>s+r.curVal,0);
+        const secPnl=items.reduce((s,r)=>s+r.pnl,0);
+        const secInv=items.reduce((s,r)=>s+r.investAmount,0);
         return(
           <div key={sec} className="card mb14">
             <div className="flexb mb14">
               <div>
                 <div className="section-title">{sec}</div>
-                <div style={{fontSize:11,color:'var(--text3)',marginTop:2}}>{fmtKRW(secVal)} · {((secVal/totalAll)*100).toFixed(1)}%</div>
+                <div style={{fontSize:11,color:'var(--text3)',marginTop:2}}>
+                  {fmtKRW(secVal)} · {((secVal/totalAll)*100).toFixed(1)}%
+                  <span style={{marginLeft:8}} className={secPnl>=0?'up':'down'}>{fmtKRW(secPnl)} ({fmtPct(secInv>0?secPnl/secInv*100:0)})</span>
+                </div>
               </div>
               <div style={{width:10,height:10,borderRadius:'50%',background:COLORS[si]}}/>
             </div>
             <div className="tbl-wrap">
               <table>
-                <thead><tr><th>종목</th><th className="tr">투자금</th><th className="tr">평가금</th><th className="tr">손익률</th><th className="tr">비중</th><th className="tr">목표</th></tr></thead>
+                <thead><tr><th>종목</th><th className="tr">투자금</th><th className="tr">평가금</th><th className="tr">손익</th><th className="tr">손익%</th><th className="tr">실제비중</th><th className="tr">목표비중</th><th className="tr">추가매수/매도</th></tr></thead>
                 <tbody>
                   {items.map(r=>(
                     <tr key={r.id}>
                       <td><span className="ticker-chip">{r.ticker}</span> <span style={{marginLeft:6,fontSize:12}}>{r.name}</span></td>
                       <td className="tr mono">{fmtKRW(r.investAmount)}</td>
                       <td className="tr mono">{fmtKRW(r.curVal)}</td>
+                      <td className="tr"><span className={r.pnl>=0?'up':'down'}>{fmtKRW(r.pnl)}</span></td>
                       <td className="tr"><span className={`badge ${r.pnlPct>=0?'badge-up':'badge-down'}`}>{fmtPct(r.pnlPct)}</span></td>
                       <td className="tr mono">{r.realPct.toFixed(1)}%</td>
                       <td className="tr mono">{r.targetPct}%</td>
+                      <td className="tr" style={{fontSize:11}}>
+                        {Math.abs(r.diff)>=1?(
+                          <span style={{color:r.needAmt>0?'var(--up)':'var(--down)',fontWeight:700}}>
+                            {r.needAmt>0?'▲':'▼'} {fmtKRW(Math.abs(r.needAmt))}
+                          </span>
+                        ):<span style={{color:'var(--text3)'}}>✅ 균형</span>}
+                      </td>
                     </tr>
                   ))}
                 </tbody>
@@ -793,11 +913,11 @@ function Portfolio({holdings,setHoldings,prices,exchRate}){
         );
       })}
 
-      {showModal&&(
-        <Modal title={editItem?'종목 수정':'종목 추가'} onClose={()=>setShowModal(false)}>
+      {showAdd&&(
+        <Modal title="종목 추가" onClose={()=>setShowAdd(false)}>
           <div className="form-row">
             <div className="form-group" style={{flex:2}}>
-              <label>티커 입력 (자동완성)</label>
+              <label>티커 (자동완성)</label>
               <TickerInput value={form.ticker} onChange={v=>setForm(f=>({...f,ticker:v}))} onSelect={handleTickerSelect}/>
             </div>
             <div className="form-group">
@@ -813,26 +933,26 @@ function Portfolio({holdings,setHoldings,prices,exchRate}){
           <div className="form-row">
             <div className="form-group">
               <label>종목명</label>
-              <input value={form.name} onChange={e=>setForm(f=>({...f,name:e.target.value}))} placeholder="자동 입력됨"/>
+              <input value={form.name} onChange={e=>setForm(f=>({...f,name:e.target.value}))} placeholder="자동입력"/>
             </div>
             <div className="form-group">
               <label>섹터/자산군</label>
-              <input value={form.sector} onChange={e=>setForm(f=>({...f,sector:e.target.value}))} placeholder="미국주식"/>
+              <input value={form.sector} onChange={e=>setForm(f=>({...f,sector:e.target.value}))}/>
             </div>
           </div>
           <div className="form-row">
             <div className="form-group">
-              <label>투자 금액 (₩)</label>
+              <label>투자금액 (₩)</label>
               <div className="input-wrap">
                 <input type="number" value={form.investAmount} onChange={e=>setForm(f=>({...f,investAmount:e.target.value}))} placeholder="5000000"/>
-                <span className="input-suffix">원</span>
+                <span className="input-suffix">₩</span>
               </div>
             </div>
             <div className="form-group">
               <label>평균단가 (₩) {priceLoading&&<span className="loading-dot"/>}</label>
               <div className="input-wrap">
-                <input type="number" value={form.avgCost} onChange={e=>setForm(f=>({...f,avgCost:e.target.value}))} placeholder="자동 조회됨"/>
-                <span className="input-suffix">원</span>
+                <input type="number" value={form.avgCost} onChange={e=>setForm(f=>({...f,avgCost:e.target.value}))} placeholder="자동조회"/>
+                <span className="input-suffix">₩</span>
               </div>
             </div>
             <div className="form-group">
@@ -849,8 +969,8 @@ function Portfolio({holdings,setHoldings,prices,exchRate}){
             </div>
           )}
           <div className="flex gap8">
-            <button className="btn btn-primary w100" onClick={saveItem}>{editItem?'저장':'추가'}</button>
-            <button className="btn btn-secondary" onClick={()=>setShowModal(false)}>취소</button>
+            <button className="btn btn-primary w100" onClick={saveItem}>추가</button>
+            <button className="btn btn-secondary" onClick={()=>setShowAdd(false)}>취소</button>
           </div>
         </Modal>
       )}
