@@ -1252,12 +1252,17 @@ function App(){
   // 시계
   useEffect(()=>{const t=setInterval(()=>setTime(nowStr()),30000);return()=>clearInterval(t);},[]);
 
-  // 마켓바 데이터
+  // 마켓바 데이터 + 환율 자동 적용
   const [barData,setBarData]=useState({});
   useEffect(()=>{
     const tickers=['SPY','QQQ','%5EKS11','%5EKQ11','%5EVIX','USDKRW%3DX','GC%3DF','CL%3DF'];
-    fetchMultiplePrices(tickers).then(setBarData);
-    const t=setInterval(()=>fetchMultiplePrices(tickers).then(setBarData),60000);
+    const fetchAndApply=()=>fetchMultiplePrices(tickers).then(d=>{
+      setBarData(d);
+      const krw=d['USDKRW%3DX']?.price;
+      if(krw&&krw>100){setExchRate_(Math.round(krw));save('exchRate',Math.round(krw));}
+    });
+    fetchAndApply();
+    const t=setInterval(fetchAndApply,60000);
     return()=>clearInterval(t);
   },[]);
 
