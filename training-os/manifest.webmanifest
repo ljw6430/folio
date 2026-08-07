@@ -1,0 +1,14 @@
+{
+  "name": "TRAINING OS BLACK",
+  "short_name": "TRAINING OS",
+  "description": "개인용 운동 기록 및 자동 중량 추천 웹앱",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0b0c0f",
+  "theme_color": "#0b0c0f",
+  "icons": [
+    {"src":"./icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}
+  ]
+}
