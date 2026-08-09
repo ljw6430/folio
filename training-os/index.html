@@ -33,7 +33,7 @@
   <b>내 음식 추가</b>
   <div class="muted tiny" style="margin-top:4px;color:var(--g)">제품명이나 성분표 사진을 TRAINING OS 관리 채팅에 보내면 AI 확인 후 기본 목록에 추가할 수 있습니다.</div>
   <div class="muted tiny" style="margin:4px 0 9px">포장지에 적힌 1회 제공량과 영양정보를 그대로 입력하면 이후 원터치로 사용할 수 있습니다.</div>
-  <div class="customgrid"><input id="cfName" placeholder="음식명"><input id="cfAmount" type="number" inputmode="decimal" placeholder="제공량"><select id="cfUnit"><option>g</option><option>ml</option><option>개</option><option>팩</option><option>큰술</option></select></div>
+  <div class="customgrid"><input id="cfName" placeholder="음식명"><input id="cfAmount" type="number" inputmode="decimal" placeholder="제공량"><select id="cfUnit"><option>g</option><option>ml</option><option>개</option><option>팩</option><option>큰술</option><option>병</option></select></div>
   <div class="customgrid" style="margin-top:7px"><input id="cfKcal" type="number" inputmode="decimal" placeholder="kcal"><input id="cfP" type="number" inputmode="decimal" placeholder="단백질"><input id="cfC" type="number" inputmode="decimal" placeholder="탄수"></div>
   <div class="row" style="margin-top:7px"><input id="cfF" type="number" inputmode="decimal" placeholder="지방 g"><button class="btn pri" style="white-space:nowrap" onclick="addCustomFood()">저장 후 추가</button></div>
 </div>
@@ -58,6 +58,7 @@ const FOODS=[
 {id:'greek_yogurt',n:'그릭요거트 플레인',cat:'간편식',base:100,u:'g',def:100,k:75,p:8,c:5,f:2},
 {id:'protein_greek',n:'단백질 그릭요거트',cat:'간편식',base:100,u:'g',def:100,k:95,p:12,c:9,f:1},
 {id:'protein_shake',n:'단백질 쉐이크',cat:'간편식',base:1,u:'스쿱',def:1,k:120,p:24,c:3,f:2},
+{id:'labnosh_banana_350',n:'랩노쉬 프로틴 드링크 바나나',cat:'간편식',base:1,u:'병',def:1,k:125,p:27,c:3,f:.5,barcode:'8800261387474'},
 {id:'mayo_half',n:'오뚜기 1/2 마요네즈',cat:'소스',base:15,u:'g',def:15,k:50,p:.2,c:1.5,f:4.8},
 {id:'vividsauce',n:'비비드키친 저칼로리 소스',cat:'소스',base:20,u:'g',def:20,k:10,p:0,c:2,f:0},
 {id:'olive_oil',n:'올리브오일',cat:'소스',base:10,u:'g',def:10,k:90,p:0,c:0,f:10},
