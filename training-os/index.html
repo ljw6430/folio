@@ -33,7 +33,7 @@
   <b>내 음식 추가</b>
   <div class="muted tiny" style="margin-top:4px;color:var(--g)">제품명이나 성분표 사진을 TRAINING OS 관리 채팅에 보내면 AI 확인 후 기본 목록에 추가할 수 있습니다.</div>
   <div class="muted tiny" style="margin:4px 0 9px">포장지에 적힌 1회 제공량과 영양정보를 그대로 입력하면 이후 원터치로 사용할 수 있습니다.</div>
-  <div class="customgrid"><input id="cfName" placeholder="음식명"><input id="cfAmount" type="number" inputmode="decimal" placeholder="제공량"><select id="cfUnit"><option>g</option><option>ml</option><option>개</option><option>팩</option><option>큰술</option><option>병</option></select></div>
+  <div class="customgrid"><input id="cfName" placeholder="음식명"><input id="cfAmount" type="number" inputmode="decimal" placeholder="제공량"><select id="cfUnit"><option>g</option><option>ml</option><option>개</option><option>팩</option><option>큰술</option><option>병</option><option>컵</option><option>통</option></select></div>
   <div class="customgrid" style="margin-top:7px"><input id="cfKcal" type="number" inputmode="decimal" placeholder="kcal"><input id="cfP" type="number" inputmode="decimal" placeholder="단백질"><input id="cfC" type="number" inputmode="decimal" placeholder="탄수"></div>
   <div class="row" style="margin-top:7px"><input id="cfF" type="number" inputmode="decimal" placeholder="지방 g"><button class="btn pri" style="white-space:nowrap" onclick="addCustomFood()">저장 후 추가</button></div>
 </div>
@@ -55,8 +55,10 @@ const FOODS=[
 {id:'rockfish',n:'우럭회',cat:'회',base:100,u:'g',def:150,k:110,p:22,c:0,f:2},
 {id:'salmon',n:'연어회',cat:'회',base:100,u:'g',def:150,k:208,p:20,c:0,f:13},
 {id:'seabream',n:'참돔회',cat:'회',base:100,u:'g',def:150,k:110,p:22,c:0,f:2},
+{id:'grilled_mackerel',n:'고등어 구이',cat:'단백질',base:100,u:'g',def:100,k:262,p:23.9,c:0,f:17.8,src:'USDA'},
 {id:'greek_yogurt',n:'그릭요거트 플레인',cat:'간편식',base:100,u:'g',def:100,k:75,p:8,c:5,f:2},
 {id:'protein_greek',n:'단백질 그릭요거트',cat:'간편식',base:100,u:'g',def:100,k:95,p:12,c:9,f:1},
+{id:'bulgaris_lactofree_protein_greek_150',n:'불가리스 락토프리 프로틴 그릭요거트',cat:'간편식',base:1,u:'통',def:1,k:150,p:15.5,c:12,f:4.2,grams:150},
 {id:'protein_shake',n:'단백질 쉐이크',cat:'간편식',base:1,u:'스쿱',def:1,k:120,p:24,c:3,f:2},
 {id:'bsn_syntha6_original',n:'신타6 오리지널(물)',cat:'간편식',base:1,u:'스쿱',def:1,k:190,p:22,c:15,f:6,src:'BSN 공식'},
 {id:'labnosh_banana_350',n:'랩노쉬 프로틴 드링크 바나나',cat:'간편식',base:1,u:'병',def:1,k:125,p:27,c:3,f:.5,barcode:'8800261387474'},
@@ -70,6 +72,7 @@ const FOODS=[
 {id:'potato',n:'감자(찐 것)',cat:'탄수화물',base:100,u:'g',def:150,k:87,p:1.9,c:20,f:.1},
 {id:'oatmeal',n:'오트밀(마른 것)',cat:'탄수화물',base:50,u:'g',def:50,k:190,p:6.5,c:32,f:3.5},
 {id:'kurlys_pick_protein_slab',n:'컬리스픽 고단백 저당 슬랩',cat:'탄수화물',base:100,u:'g',def:100,k:223,p:14,c:39,f:1.4,sugar:1.5,sodium:435,total:600},
+{id:'ottogi_cup_noodle_spicy_37_8',n:'오뚜기 컵누들 매콤한맛',cat:'탄수화물',base:1,u:'컵',def:1,k:120,p:1,c:29,f:0,grams:37.8,sugar:3,sodium:890},
 {id:'lettuce',n:'양상추',cat:'채소',base:100,u:'g',def:100,k:15,p:1.4,c:2.9,f:.2},
 {id:'cabbage',n:'양배추',cat:'채소',base:100,u:'g',def:100,k:25,p:1.3,c:5.8,f:.1},
 {id:'carrot',n:'당근',cat:'채소',base:100,u:'g',def:100,k:41,p:.9,c:9.6,f:.2},
@@ -78,12 +81,14 @@ const FOODS=[
 {id:'tomato',n:'토마토',cat:'채소',base:100,u:'g',def:100,k:18,p:.9,c:3.9,f:.2},
 {id:'onion',n:'양파',cat:'채소',base:100,u:'g',def:100,k:40,p:1.1,c:9.3,f:.1},
 {id:'tofu',n:'두부',cat:'단백질',base:100,u:'g',def:150,k:80,p:8,c:2,f:4.5},
+{id:'cj_haru_natto_45_5',n:'CJ 즐거운동행 하루낫또',cat:'단백질',base:1,u:'팩',def:1,k:75,p:6.5,c:10,f:1.4,grams:45.5,sodium:135},
 {id:'tuna',n:'참치캔(물담금)',cat:'단백질',base:100,u:'g',def:100,k:116,p:26,c:0,f:1},
 {id:'lean_beef',n:'소고기 살코기(구운 것)',cat:'단백질',base:100,u:'g',def:150,k:200,p:27,c:0,f:10},
 {id:'pork_tender',n:'돼지 안심(구운 것)',cat:'단백질',base:100,u:'g',def:150,k:190,p:27,c:0,f:8},
 {id:'lowfat_milk',n:'저지방 우유',cat:'간편식',base:200,u:'ml',def:200,k:90,p:7,c:10,f:2},
 {id:'banana',n:'바나나',cat:'간편식',base:1,u:'개',def:1,k:105,p:1.3,c:27,f:.4},
 {id:'apple',n:'사과',cat:'간편식',base:1,u:'개',def:1,k:95,p:.5,c:25,f:.3},
+{id:'blueberries_raw',n:'블루베리(생과)',cat:'간편식',base:100,u:'g',def:100,k:57,p:.7,c:14.5,f:.3,src:'USDA'},
 {id:'almonds',n:'아몬드',cat:'간편식',base:20,u:'g',def:20,k:116,p:4,c:4,f:10},
 {id:'kimchi',n:'김치',cat:'채소',base:100,u:'g',def:50,k:25,p:2,c:4,f:.5},
 {id:'subway',n:'서브웨이 15cm(임시값)',cat:'외식',base:1,u:'개',def:1,k:450,p:25,c:55,f:14}
