@@ -66,7 +66,7 @@ const FOODS=[
 {id:'vividsauce',n:'비비드키친 저칼로리 소스',cat:'소스',base:20,u:'g',def:20,k:10,p:0,c:2,f:0},
 {id:'olive_oil',n:'올리브오일',cat:'소스',base:10,u:'g',def:10,k:90,p:0,c:0,f:10},
 {id:'homemade_wholegrain_balsamic_dressing_10',n:'홀그레인 발사믹 소스(직접 만든 것)',cat:'소스',base:1,u:'종지',def:1,k:45,p:.1,c:.8,f:4.6,ml:10,note:'올리브오일 5ml와 홀그레인 머스타드·발사믹 식초·소금·후추 기준 추정'},
-{id:'homemade_greek_yogurt_dill_sauce',n:'그릭요거트 딜소스(직접 만든 것)',cat:'소스',base:2,u:'스푼',def:2,k:30,p:1.5,c:2.5,f:1.5,grams:30,note:'그릭요거트 120g·오뚜기 1/2 마요네즈 15g·마늘분말 1/3스푼·양파분말 1스푼·큐민·딜 8g·알룰로스 1스푼·식초 1스푼 기준 추정'},
+{id:'homemade_greek_yogurt_dill_sauce',n:'렌치소스(직접 만든 것)',cat:'소스',base:2,u:'스쿱',def:2,k:30,p:1.5,c:2.5,f:1.5,grams:30,note:'그릭요거트 120g·오뚜기 1/2 마요네즈 15g·마늘분말 1/3스푼·양파분말 1스푼·큐민·딜 8g·알룰로스 1스푼·식초 1스푼 기준 추정'},
 {id:'mozzarella',n:'모짜렐라 치즈',cat:'간편식',base:30,u:'g',def:30,k:85,p:7,c:1,f:6},
 {id:'rice',n:'쌀밥',cat:'탄수화물',base:100,u:'g',def:210,k:148,p:2.7,c:32.7,f:.3},
 {id:'brown_rice',n:'현미밥',cat:'탄수화물',base:100,u:'g',def:210,k:145,p:3.2,c:30.5,f:1.2},
@@ -127,7 +127,7 @@ function renderNutrition(){let date=localDateKey();foodDate.value=date;let t=foo
 function renderFoodCats(){let cats=['전체','최근','단백질','회','탄수화물','채소','소스','간편식','외식','내 음식'];foodCats.innerHTML=cats.map(c=>'<button class="cat '+(foodCat===c?'on':'')+'" onclick="setFoodCat(\''+c+'\')">'+c+'</button>').join('')}
 function setFoodCat(c){foodCat=c;renderFoodCats();renderFoodPicker()}
 function recentIds(){let out=[];[...db.foodLogs].reverse().forEach(x=>{if(!out.includes(x.foodId))out.push(x.foodId)});return out.slice(0,12)}
-function renderFoodPicker(){let q=(foodQ.value||'').trim().toLowerCase(),list=allFoods();if(foodCat==='최근'){let ids=recentIds();list=ids.map(foodById).filter(Boolean)}else if(foodCat==='내 음식')list=db.customFoods||[];else if(foodCat!=='전체')list=list.filter(x=>x.cat===foodCat);if(q)list=list.filter(x=>x.n.toLowerCase().includes(q));list=list.slice(0,20);foodPicker.innerHTML=list.length?list.map(x=>'<button class="foodbtn" onclick="quickAdd(\''+x.id+'\')"><b>'+esc(x.n)+'</b><div class="muted tiny">'+fmt(x.def)+' '+esc(x.u)+' · 약 '+Math.round(x.k*x.def/x.base)+'kcal</div><div class="plus">+ 바로 기록</div></button>').join(''):'<div class="muted small">검색 결과가 없습니다. 아래에서 내 음식으로 추가하세요.</div>'}
+function renderFoodPicker(){let q=(foodQ.value||'').trim().toLowerCase(),list=allFoods();if(foodCat==='최근'){let ids=recentIds();list=ids.map(foodById).filter(Boolean)}else if(foodCat==='내 음식')list=db.customFoods||[];else if(foodCat!=='전체')list=list.filter(x=>x.cat===foodCat);if(q)list=list.filter(x=>x.n.toLowerCase().includes(q));list=list.slice(0,60);foodPicker.innerHTML=list.length?list.map(x=>'<button class="foodbtn" onclick="quickAdd(\''+x.id+'\')"><b>'+esc(x.n)+'</b><div class="muted tiny">'+fmt(x.def)+' '+esc(x.u)+' · 약 '+Math.round(x.k*x.def/x.base)+'kcal</div><div class="plus">+ 바로 기록</div></button>').join(''):'<div class="muted small">검색 결과가 없습니다. 아래에서 내 음식으로 추가하세요.</div>'}
 function quickAdd(id){let x=foodById(id);if(!x)return;let now=new Date();db.foodLogs.push({id:'fl_'+Date.now()+'_'+Math.random().toString(16).slice(2),d:localDateKey(now),ts:now.toISOString(),foodId:x.id,n:x.n,base:x.base,u:x.u,amount:x.def,k:x.k,p:x.p,c:x.c,f:x.f});save();renderNutrition();toastx(x.n+' 추가됨')}
 function itemNut(x,key){return (+x[key]||0)*(+x.amount||0)/(+x.base||1)}
 function foodTime(x){if(!x.ts)return '시간 미기록';let d=new Date(x.ts);return isNaN(d)?'시간 미기록':d.toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit',hour12:false})}
