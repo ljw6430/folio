@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>지원이네 Marketing OS</title>
+<style>
+:root{--bg:#07111f;--panel:#0d1b2d;--panel2:#12243a;--line:#213754;--text:#f6f8fb;--muted:#91a2b8;--blue:#47a9ff;--mint:#38d9b0;--red:#ff6b73;--amber:#ffc857}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(160deg,#06101d,#0a1728 55%,#08111d);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Pretendard,"Noto Sans KR",sans-serif;min-height:100vh}
+button,input,textarea{font:inherit}.hidden{display:none!important}.shell{display:grid;grid-template-columns:240px 1fr;min-height:100vh}.side{border-right:1px solid var(--line);padding:24px 16px;background:rgba(5,13,24,.86);position:sticky;top:0;height:100vh}.brand{font-size:22px;font-weight:900;letter-spacing:-.5px}.brand small{display:block;font-size:11px;color:var(--mint);letter-spacing:1.5px;margin-top:5px}.nav{margin-top:28px;display:grid;gap:7px}.nav button{width:100%;text-align:left;border:0;background:transparent;color:var(--muted);padding:12px 14px;border-radius:12px;cursor:pointer}.nav button.active,.nav button:hover{background:var(--panel2);color:white}.sidefoot{position:absolute;bottom:20px;left:16px;right:16px}.ghost{background:transparent!important;border:1px solid var(--line)!important;color:var(--muted)!important}
+.main{padding:28px;max-width:1500px;width:100%}.top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:24px}.top h1{margin:0;font-size:30px;letter-spacing:-1px}.top p{color:var(--muted);margin:7px 0 0}.badge{border:1px solid rgba(56,217,176,.35);color:var(--mint);background:rgba(56,217,176,.08);padding:8px 12px;border-radius:999px;font-size:13px;font-weight:700}
+.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}.card{background:linear-gradient(180deg,rgba(18,36,58,.95),rgba(12,26,44,.95));border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 18px 40px rgba(0,0,0,.15)}.metric .label{color:var(--muted);font-size:13px}.metric .num{font-size:31px;font-weight:900;margin-top:7px}.metric .sub{font-size:12px;color:var(--muted);margin-top:4px}
+.two{display:grid;grid-template-columns:1.1fr .9fr;gap:14px;margin-top:14px}.card h2{font-size:17px;margin:0 0 15px}.hero{padding:22px;background:radial-gradient(circle at 90% 10%,rgba(71,169,255,.18),transparent 42%),linear-gradient(180deg,rgba(18,36,58,.98),rgba(12,26,44,.98))}.hero strong{font-size:25px}.hero p{color:var(--muted);line-height:1.7}.actionbar{display:flex;gap:9px;flex-wrap:wrap;margin-top:15px}.btn{border:0;border-radius:11px;padding:11px 15px;font-weight:800;cursor:pointer;background:var(--blue);color:#06101d}.btn.secondary{background:var(--panel2);color:white;border:1px solid var(--line)}.btn.green{background:var(--mint)}.btn.red{background:rgba(255,107,115,.15);color:#ff9ca2;border:1px solid rgba(255,107,115,.25)}
+.section{display:none}.section.active{display:block}.formrow{display:grid;grid-template-columns:1fr auto;gap:10px}.input,textarea{width:100%;background:#081522;border:1px solid var(--line);color:white;border-radius:12px;padding:12px;outline:none}.input:focus,textarea:focus{border-color:#3d86c4}textarea{min-height:330px;resize:vertical;line-height:1.55}.muted{color:var(--muted)}.status{font-size:13px;margin-top:10px}.status.ok{color:var(--mint)}.status.err{color:#ff9ca2}.products{display:grid;gap:8px;margin-top:12px}.prod{display:grid;grid-template-columns:1fr auto auto;gap:12px;align-items:center;border:1px solid var(--line);background:#091725;border-radius:12px;padding:12px}.prod b{font-size:14px}.prod small{display:block;color:var(--muted);margin-top:3px}.price{font-weight:900}.pill{font-size:11px;padding:5px 8px;border-radius:999px;background:rgba(56,217,176,.09);color:var(--mint)}.pill.sold{color:#ff9ca2;background:rgba(255,107,115,.1)}
+.loginWrap{min-height:100vh;display:grid;place-items:center;padding:24px}.login{width:min(430px,100%);background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:28px}.login h1{margin:0 0 7px}.login p{color:var(--muted);margin:0 0 23px}.login .input{margin-bottom:10px}.login .btn{width:100%;margin-top:5px}.tiny{font-size:11px;color:var(--muted);line-height:1.5;margin-top:12px}.empty{padding:35px;text-align:center;border:1px dashed var(--line);border-radius:14px;color:var(--muted)}
+@media(max-width:900px){.shell{display:block}.side{position:static;height:auto;border-right:0;border-bottom:1px solid var(--line);padding:15px}.brand small,.sidefoot{display:none}.nav{margin-top:12px;display:flex;overflow:auto}.nav button{white-space:nowrap;width:auto}.main{padding:18px}.grid4{grid-template-columns:repeat(2,1fr)}.two{grid-template-columns:1fr}.top{align-items:center}.top h1{font-size:24px}}
+@media(max-width:520px){.grid4{grid-template-columns:1fr 1fr}.metric .num{font-size:25px}.main{padding:14px}.prod{grid-template-columns:1fr auto}.prod .pill{grid-column:2}.formrow{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div id="loginView" class="loginWrap">
+  <div class="login">
+    <div class="badge" style="display:inline-block;margin-bottom:15px">JIWONINE · CMO AGENT</div>
+    <h1>지원이네 Marketing OS</h1>
+    <p>리뷰·콘텐츠·광고를 한 곳에서 운영합니다.</p>
+    <input id="email" class="input" type="email" placeholder="이메일" autocomplete="username">
+    <input id="password" class="input" type="password" placeholder="비밀번호" autocomplete="current-password">
+    <button id="loginBtn" class="btn">로그인</button>
+    <div id="loginStatus" class="status"></div>
+    <div class="tiny">Supabase에 만든 관리자 계정으로 로그인하세요. OpenAI 비밀키는 브라우저에 저장되지 않습니다.</div>
+  </div>
+</div>
+
+<div id="appView" class="shell hidden">
+  <aside class="side">
+    <div class="brand">지원이네 <small>MARKETING OS · v0.1</small></div>
+    <div class="nav">
+      <button class="active" data-tab="dashboard">대시보드</button>
+      <button data-tab="sync">인어교주 동기화</button>
+      <button data-tab="products">상품 DB</button>
+      <button data-tab="inventory">오늘의 수산물</button>
+      <button data-tab="reviews">리뷰센터</button>
+      <button data-tab="content">콘텐츠센터</button>
+      <button data-tab="ads">광고센터</button>
+      <button data-tab="agent">CMO Agent</button>
+    </div>
+    <div class="sidefoot"><button id="logoutBtn" class="btn ghost" style="width:100%">로그아웃</button></div>
+  </aside>
+
+  <main class="main">
+    <section id="dashboard" class="section active">
+      <div class="top"><div><h1>오늘의 마케팅</h1><p id="businessLine">지원이네 데이터를 불러오는 중...</p></div><span class="badge">● 시스템 정상</span></div>
+      <div class="grid4">
+        <div class="card metric"><div class="label">등록 상품</div><div id="mProducts" class="num">—</div><div class="sub">인어교주 상품 DB</div></div>
+        <div class="card metric"><div class="label">누적 리뷰</div><div id="mReviews" class="num">—</div><div class="sub">통합 리뷰센터</div></div>
+        <div class="card metric"><div class="label">콘텐츠 초안</div><div id="mContents" class="num">—</div><div class="sub">인스타·블로그</div></div>
+        <div class="card metric"><div class="label">AI 제안</div><div id="mIdeas" class="num">—</div><div class="sub">승인 대기</div></div>
+      </div>
+      <div class="two">
+        <div class="card hero"><h2>CMO Agent</h2><strong>데이터 연결을 시작합니다.</strong><p>먼저 인어교주 현재 메뉴를 동기화하면 실제 판매상품·가격·품절 상태를 기준으로 리뷰, 인스타그램, 블로그, 광고 판단을 연결할 수 있습니다.</p><div class="actionbar"><button class="btn green" onclick="openTab('sync')">인어교주 메뉴 동기화</button><button class="btn secondary" onclick="openTab('inventory')">오늘 상태 입력</button></div></div>
+        <div class="card"><h2>운영 원칙</h2><p class="muted" style="line-height:1.8">✓ 광고비 변경은 승인 후 실행<br>✓ 부정 리뷰 답변은 승인 필수<br>✓ 가격은 상품 DB 기준으로만 사용<br>✓ Instagram 자동게시 초기 OFF<br>✓ 변경 이력은 DB에 기록</p></div>
+      </div>
+    </section>
+
+    <section id="sync" class="section">
+      <div class="top"><div><h1>인어교주 메뉴 동기화</h1><p>현재 지원이네 매장 페이지 내용을 붙여넣으면 AI가 상품을 구조화합니다.</p></div><span class="badge">STORE 0000000310</span></div>
+      <div class="card">
+        <div class="formrow"><input id="tpUrl" class="input" value="https://tpirates.com/store/0000000310"><button id="openTp" class="btn secondary">매장 페이지 열기</button></div>
+        <p class="tiny">인어교주 페이지에서 전체 메뉴 영역을 복사해 아래에 붙여넣으세요. 중복 노출된 상품은 AI가 하나로 합칩니다.</p>
+        <textarea id="rawText" placeholder="여기에 인어교주해적단 지원이네 메뉴 내용을 붙여넣으세요..."></textarea>
+        <div class="actionbar"><button id="analyzeBtn" class="btn">AI 분석하기</button><button id="applyBtn" class="btn green hidden">분석 결과 DB 반영</button></div>
+        <div id="syncStatus" class="status"></div>
+      </div>
+      <div id="analysisCard" class="card hidden" style="margin-top:14px"><h2>분석 결과 <span id="detected" class="muted"></span></h2><div id="analysisProducts" class="products"></div></div>
+    </section>
+
+    <section id="products" class="section"><div class="top"><div><h1>상품 DB</h1><p>Marketing OS가 참고하는 실제 판매상품입니다.</p></div><button class="btn secondary" onclick="loadProducts()">새로고침</button></div><div class="card"><div id="productList" class="products"></div></div></section>
+    <section id="inventory" class="section"><div class="top"><div><h1>오늘의 수산물</h1><p>v0.2에서 상품 상태·재고·원가 흐름 입력 UI가 연결됩니다.</p></div></div><div class="empty">다음 구현: “활새우 상태 최상 / 꽃게 살수율 좋음 / 줄전갱이 소량” 입력 → CMO 홍보 우선순위 계산</div></section>
+    <section id="reviews" class="section"><div class="top"><div><h1>리뷰센터</h1><p>네이버 · Google · 인어교주 리뷰 분석/답글</p></div></div><div class="empty">다음 구현: 리뷰 붙여넣기/수집 → 감성분석 → 답글 → 인스타 활용점수</div></section>
+    <section id="content" class="section"><div class="top"><div><h1>콘텐츠센터</h1><p>Instagram 하루 1피드 · 네이버 블로그 초안</p></div></div><div class="empty">다음 구현: 오늘 상품 + 리뷰 + 제철 데이터를 이용해 매일 콘텐츠 생성</div></section>
+    <section id="ads" class="section"><div class="top"><div><h1>광고센터</h1><p>Google Ads · Naver Search Ads</p></div></div><div class="empty">다음 구현: 광고 데이터 읽기전용 연결 → AI 성과진단 → 승인형 변경</div></section>
+    <section id="agent" class="section"><div class="top"><div><h1>CMO Agent</h1><p>관찰 → 분석 → 제안 → 승인 → 실행</p></div></div><div class="empty">상품·리뷰·콘텐츠·광고 데이터가 연결되면 오늘의 마케팅 전략을 자동 제안합니다.</div></section>
+  </main>
+</div>
+
+<script type="module">
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+const SUPABASE_URL='https://iphxdputdlhfsttlffrz.supabase.co';
+const SUPABASE_KEY='sb_publishable_uSCIap8sczT2MNuCXT4zQg_KVkNspU6';
+const sb=createClient(SUPABASE_URL,SUPABASE_KEY);
+let business=null,currentImportId=null;
+const $=id=>document.getElementById(id);
+const fmt=v=>v==null?'—':Number(v).toLocaleString('ko-KR');
+
+async function init(){const {data:{session}}=await sb.auth.getSession(); if(session) showApp(); else showLogin();}
+function showLogin(){$('loginView').classList.remove('hidden');$('appView').classList.add('hidden')}
+async function showApp(){$('loginView').classList.add('hidden');$('appView').classList.remove('hidden'); await loadBusiness(); await Promise.all([loadCounts(),loadProducts()]);}
+$('loginBtn').onclick=async()=>{const email=$('email').value.trim(),password=$('password').value; $('loginStatus').textContent='로그인 중...'; const {error}=await sb.auth.signInWithPassword({email,password}); if(error){$('loginStatus').textContent=error.message;$('loginStatus').className='status err';return} $('loginStatus').textContent='';showApp()};
+$('logoutBtn').onclick=async()=>{await sb.auth.signOut();showLogin()};
+
+async function loadBusiness(){const {data,error}=await sb.from('businesses').select('*').limit(1).single(); if(error){$('businessLine').textContent='사업장 조회 실패: '+error.message;return} business=data;$('businessLine').textContent=`${data.name} · ${data.brand_name||''} · 승인형 자동화 모드`;}
+async function count(table,extra){let q=sb.from(table).select('*',{count:'exact',head:true}); if(extra) q=extra(q); const {count}=await q; return count??0;}
+async function loadCounts(){$('mProducts').textContent=fmt(await count('products',q=>business?q.eq('business_id',business.id):q));$('mReviews').textContent=fmt(await count('reviews',q=>business?q.eq('business_id',business.id):q));$('mContents').textContent=fmt(await count('content_drafts',q=>business?q.eq('business_id',business.id):q));$('mIdeas').textContent=fmt(await count('ai_recommendations',q=>business?q.eq('business_id',business.id).eq('status','pending'):q));}
+
+window.openTab=(id)=>{document.querySelectorAll('.section').forEach(x=>x.classList.toggle('active',x.id===id));document.querySelectorAll('.nav button').forEach(x=>x.classList.toggle('active',x.dataset.tab===id));if(id==='products')loadProducts()};
+document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>openTab(b.dataset.tab));
+$('openTp').onclick=()=>window.open($('tpUrl').value,'_blank');
+
+$('analyzeBtn').onclick=async()=>{
+  if(!business)return;
+  const raw=$('rawText').value.trim(); if(raw.length<100){setSync('인어교주 메뉴 내용을 충분히 붙여넣어 주세요.',false);return}
+  setSync('1/3 원문 저장 중...',true); $('analyzeBtn').disabled=true; $('applyBtn').classList.add('hidden'); $('analysisCard').classList.add('hidden');
+  const {data:imp,error:e1}=await sb.from('source_imports').insert({business_id:business.id,source_platform:'tpirates',source_url:$('tpUrl').value,raw_text:raw}).select('id').single();
+  if(e1){setSync('저장 실패: '+e1.message,false);$('analyzeBtn').disabled=false;return}
+  currentImportId=imp.id; setSync('2/3 OpenAI가 상품을 분석 중...',true);
+  const {data,error}=await sb.functions.invoke('parse-tpirates-menu',{body:{source_import_id:currentImportId}});
+  $('analyzeBtn').disabled=false;
+  if(error||!data?.success){setSync('AI 분석 실패: '+(data?.error||error?.message||'알 수 없는 오류'),false);return}
+  renderAnalysis(data.products||[]); $('detected').textContent=`· ${data.detected_products}개 상품 발견`; $('analysisCard').classList.remove('hidden'); $('applyBtn').classList.remove('hidden'); setSync('3/3 분석 완료. 결과를 확인하고 DB 반영을 누르세요.',true);
+};
+
+$('applyBtn').onclick=async()=>{if(!currentImportId)return; $('applyBtn').disabled=true;setSync('상품 DB에 반영 중...',true);const {data,error}=await sb.functions.invoke('apply-tpirates-products',{body:{source_import_id:currentImportId}});$('applyBtn').disabled=false;if(error||!data?.success){setSync('반영 실패: '+(data?.error||error?.message||'알 수 없는 오류'),false);return}setSync(`${data.applied_products}개 상품을 DB에 반영했습니다.`,true);await Promise.all([loadProducts(),loadCounts()]);};
+function setSync(t,ok){$('syncStatus').textContent=t;$('syncStatus').className='status '+(ok?'ok':'err')}
+function renderAnalysis(items){$('analysisProducts').innerHTML=items.map(p=>`<div class="prod"><div><b>${escapeHtml(p.name)}</b><small>${escapeHtml(p.category||'분류 없음')} · 리뷰 ${fmt(p.review_count)}</small></div><div class="price">${p.min_price?fmt(p.min_price)+'원':'가격 미상'}</div><span class="pill ${p.stock_status==='sold_out'?'sold':''}">${p.stock_status==='sold_out'?'품절':'판매'}</span></div>`).join('')||'<div class="empty">상품을 찾지 못했습니다.</div>'}
+window.loadProducts=async()=>{if(!business)return;const {data,error}=await sb.from('products').select('name,category,current_price,review_count,popularity_rank,stock_status,option_data').eq('business_id',business.id).eq('source_platform','tpirates').order('popularity_rank',{ascending:true,nullsFirst:false}).order('name'); if(error){$('productList').innerHTML='<div class="empty">'+escapeHtml(error.message)+'</div>';return} $('productList').innerHTML=(data||[]).map(p=>`<div class="prod"><div><b>${escapeHtml(p.name)}</b><small>${escapeHtml(p.category||'')} ${p.popularity_rank?'· 인기 '+p.popularity_rank+'위':''} · 리뷰 ${fmt(p.review_count)}</small></div><div class="price">${p.current_price?fmt(p.current_price)+'원~':'—'}</div><span class="pill ${p.stock_status==='sold_out'?'sold':''}">${p.stock_status==='sold_out'?'품절':'판매중'}</span></div>`).join('')||'<div class="empty">아직 동기화된 상품이 없습니다. “인어교주 동기화”에서 시작하세요.</div>'};
+function escapeHtml(s){return String(s??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}
+init();
+</script>
+</body>
+</html>
