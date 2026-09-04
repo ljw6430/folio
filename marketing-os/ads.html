@@ -6,96 +6,70 @@
 <title>지원이네 Marketing OS · 광고 지휘센터</title>
 <style>
 :root{--bg:#06101d;--panel:#0d1b2d;--panel2:#13263d;--line:#233a58;--text:#f5f7fb;--muted:#94a6bb;--blue:#4bb1ff;--mint:#40deb6;--red:#ff747c;--amber:#ffd166}
-*{box-sizing:border-box}body{margin:0;background:linear-gradient(160deg,#06101d,#0a1728 60%,#08111d);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Pretendard,"Noto Sans KR",sans-serif;min-height:100vh}a{color:inherit}.wrap{max-width:1500px;margin:auto;padding:24px}.top{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-bottom:18px}.top h1{margin:0;font-size:30px;letter-spacing:-1px}.top p{margin:6px 0 0;color:var(--muted)}.btn{border:0;border-radius:11px;padding:11px 15px;font-weight:800;cursor:pointer;background:var(--blue);color:#06101d}.btn.secondary{background:var(--panel2);color:#fff;border:1px solid var(--line)}.btn.green{background:var(--mint)}.btn:disabled{opacity:.55;cursor:wait}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.card{background:linear-gradient(180deg,rgba(18,36,58,.97),rgba(12,26,44,.97));border:1px solid var(--line);border-radius:18px;padding:18px}.card h2{font-size:17px;margin:0 0 14px}.provider{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}.provider b{font-size:18px}.muted{color:var(--muted)}.badge{display:inline-flex;align-items:center;gap:6px;padding:6px 9px;border-radius:999px;font-size:11px;font-weight:800;background:rgba(255,209,102,.1);color:var(--amber)}.badge.ok{background:rgba(64,222,182,.1);color:var(--mint)}.badge.err{background:rgba(255,116,124,.1);color:#ff9da2}.metric .label{font-size:12px;color:var(--muted)}.metric .num{font-size:29px;font-weight:900;margin-top:6px}.section{margin-top:14px}.tablewrap{overflow:auto}.table{width:100%;border-collapse:collapse;min-width:760px}.table th,.table td{padding:11px 9px;border-bottom:1px solid var(--line);text-align:right;font-size:13px}.table th:first-child,.table td:first-child{text-align:left}.table th{color:var(--muted);font-weight:700}.setup{line-height:1.8;font-size:13px;color:var(--muted)}.setup strong{color:white}.notice{background:rgba(75,177,255,.08);border:1px solid rgba(75,177,255,.22);padding:13px 14px;border-radius:12px;color:#cceaff;font-size:13px}.rec{border:1px solid var(--line);background:#091725;border-radius:12px;padding:13px;margin-top:9px}.rec h3{margin:0 0 6px;font-size:14px}.rec p{margin:0;color:var(--muted);line-height:1.6;font-size:13px}.toolbar{display:flex;gap:8px;flex-wrap:wrap}.hidden{display:none!important}.login{max-width:420px;margin:12vh auto 0;background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:24px}.input{width:100%;padding:12px;border-radius:11px;border:1px solid var(--line);background:#081522;color:white}.status{font-size:12px;color:var(--muted);margin-top:9px;white-space:pre-wrap}.status.ok{color:var(--mint)}.status.err{color:#ff9da2}.back{font-size:13px;color:var(--muted);text-decoration:none}.connectbox{display:grid;grid-template-columns:1fr auto;gap:9px;align-items:center}.help{font-size:12px;color:var(--muted);line-height:1.7;margin-top:10px}.countline{margin-top:9px;font-size:12px;color:var(--muted)}
-@media(max-width:980px){.grid3,.grid4{grid-template-columns:1fr 1fr}}@media(max-width:640px){.grid3,.grid4{grid-template-columns:1fr}.wrap{padding:14px}.top{align-items:flex-start}.top h1{font-size:24px}.connectbox{grid-template-columns:1fr}}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(160deg,#06101d,#0a1728 60%,#08111d);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Pretendard,"Noto Sans KR",sans-serif;min-height:100vh}a{color:inherit}.wrap{max-width:1500px;margin:auto;padding:24px}.top{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-bottom:18px}.top h1{margin:0;font-size:30px;letter-spacing:-1px}.top p{margin:6px 0 0;color:var(--muted)}.btn{border:0;border-radius:11px;padding:11px 15px;font-weight:800;cursor:pointer;background:var(--blue);color:#06101d}.btn.secondary{background:var(--panel2);color:#fff;border:1px solid var(--line)}.btn.green{background:var(--mint)}.btn:disabled{opacity:.55;cursor:wait}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.grid5{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}.card{background:linear-gradient(180deg,rgba(18,36,58,.97),rgba(12,26,44,.97));border:1px solid var(--line);border-radius:18px;padding:18px}.card h2{font-size:17px;margin:0 0 14px}.provider{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}.provider b{font-size:18px}.muted{color:var(--muted)}.badge{display:inline-flex;padding:6px 9px;border-radius:999px;font-size:11px;font-weight:800;background:rgba(255,209,102,.1);color:var(--amber)}.badge.ok{background:rgba(64,222,182,.1);color:var(--mint)}.badge.err{background:rgba(255,116,124,.1);color:#ff9da2}.metric .label{font-size:12px;color:var(--muted)}.metric .num{font-size:29px;font-weight:900;margin-top:6px}.section{margin-top:14px}.tablewrap{overflow:auto}.table{width:100%;border-collapse:collapse;min-width:1050px}.table th,.table td{padding:11px 9px;border-bottom:1px solid var(--line);text-align:right;font-size:13px}.table th:first-child,.table td:first-child{text-align:left}.table th{color:var(--muted);font-weight:700}.setup{line-height:1.75;font-size:13px;color:var(--muted)}.setup strong{color:white}.notice{background:rgba(75,177,255,.08);border:1px solid rgba(75,177,255,.22);padding:13px 14px;border-radius:12px;color:#cceaff;font-size:13px}.rec{border:1px solid var(--line);background:#091725;border-radius:12px;padding:13px;margin-top:9px}.rec h3{margin:0 0 6px;font-size:14px}.rec p{margin:0;color:var(--muted);line-height:1.6;font-size:13px}.toolbar{display:flex;gap:8px;flex-wrap:wrap}.hidden{display:none!important}.login{max-width:420px;margin:12vh auto 0;background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:24px}.input{width:100%;padding:12px;border-radius:11px;border:1px solid var(--line);background:#081522;color:white}.status{font-size:12px;color:var(--muted);margin-top:9px;white-space:pre-wrap}.status.ok{color:var(--mint)}.status.err{color:#ff9da2}.back{font-size:13px;color:var(--muted);text-decoration:none}.connectbox{display:grid;grid-template-columns:1fr auto;gap:9px;align-items:center}.help{font-size:12px;color:var(--muted);line-height:1.7;margin-top:10px}.pill{display:inline-block;padding:4px 7px;border-radius:999px;font-size:11px;font-weight:800}.pill.on{background:rgba(64,222,182,.12);color:var(--mint)}.pill.off{background:rgba(255,116,124,.12);color:#ff9da2}
+@media(max-width:1100px){.grid5{grid-template-columns:repeat(3,1fr)}}@media(max-width:980px){.grid3,.grid4{grid-template-columns:1fr 1fr}}@media(max-width:640px){.grid3,.grid4,.grid5{grid-template-columns:1fr}.wrap{padding:14px}.top{align-items:flex-start}.top h1{font-size:24px}.connectbox{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-<div id="loginView" class="login">
-  <h1 style="margin:0">광고 지휘센터</h1><p class="muted">지원이네 Marketing OS 관리자 로그인</p>
-  <input id="email" class="input" type="email" placeholder="이메일" style="margin-top:8px"><input id="password" class="input" type="password" placeholder="비밀번호" style="margin-top:8px">
-  <button id="loginBtn" class="btn" style="width:100%;margin-top:10px">로그인</button><div id="loginStatus" class="status"></div>
-</div>
+<div id="loginView" class="login"><h1 style="margin:0">광고 지휘센터</h1><p class="muted">지원이네 Marketing OS 관리자 로그인</p><input id="email" class="input" type="email" placeholder="이메일" style="margin-top:8px"><input id="password" class="input" type="password" placeholder="비밀번호" style="margin-top:8px"><button id="loginBtn" class="btn" style="width:100%;margin-top:10px">로그인</button><div id="loginStatus" class="status"></div></div>
 <div id="app" class="wrap hidden">
   <div class="top"><div><a class="back" href="./">← Marketing OS</a><h1>광고 지휘센터</h1><p>네이버 검색광고 · Google Ads · Google Business Profile 통합 관리</p></div><div class="toolbar"><button id="refreshBtn" class="btn secondary">새로고침</button><button id="logoutBtn" class="btn secondary">로그아웃</button></div></div>
-  <div class="notice"><strong>운영 원칙:</strong> 초기에는 읽기/분석 중심. 예산·입찰가·키워드 변경은 AI가 제안하고 지원님 승인 후 실행합니다. 현재 안전한도는 일예산 ±15%, 키워드 입찰 ±15%입니다.</div>
-
+  <div class="notice"><strong>운영 원칙:</strong> 광고 변경은 승인 우선. 현재 자동 실행은 꺼져 있고, 키워드 입찰·일예산 변경 한도는 ±15%입니다.</div>
   <div class="grid3 section" id="providers"></div>
 
   <div class="grid3 section">
     <div class="card">
-      <h2>네이버 검색광고 연결</h2>
-      <div class="connectbox"><input id="naverCustomerId" class="input" inputmode="numeric" placeholder="광고 계정 ID (숫자)"><button id="syncNaverBtn" class="btn green">연결 · 동기화</button></div>
-      <div class="help">액세스 라이선스와 비밀키는 이미 Supabase Secrets에 저장되어 있습니다. 여기에는 <b style="color:white">광고 계정 ID</b>만 입력하면 됩니다. 광고 계정 ID는 비밀키가 아닙니다.</div>
+      <h2>네이버 검색광고</h2>
+      <div class="connectbox"><input id="naverCustomerId" class="input" inputmode="numeric" placeholder="CUSTOMER_ID"><button id="syncNaverBtn" class="btn green">구조 동기화</button></div>
+      <div class="help">CUSTOMER_ID는 <b style="color:white">2831631</b>로 연결되어 있습니다. 구조 동기화는 캠페인·광고그룹·키워드·현재 입찰가를 다시 가져옵니다.</div>
+      <button id="syncStatsBtn" class="btn" style="width:100%;margin-top:12px">최근 14일 성과 동기화</button>
       <div id="naverSyncStatus" class="status"></div>
     </div>
-    <div class="card"><h2>Google Business Profile</h2><div class="setup">다음 연결 대상입니다.<br><strong>리뷰 · 전화 · 길찾기 · 검색 노출</strong>을 Marketing OS에 가져옵니다.</div></div>
-    <div class="card"><h2>Google Ads</h2><div class="setup">GBP 다음으로 연결합니다.<br><strong>PMax · 검색광고 · 예산 · 전환</strong>까지 통합합니다.</div></div>
+    <div class="card"><h2>Google Business Profile</h2><div class="setup">다음 연결 대상.<br><strong>리뷰 · 전화 · 길찾기 · 검색 노출</strong>을 통합합니다.</div></div>
+    <div class="card"><h2>Google Ads</h2><div class="setup">GBP 다음 연결 대상.<br><strong>PMax · 검색광고 · 예산 · 전환</strong>을 통합합니다.</div></div>
+  </div>
+
+  <div class="grid5 section">
+    <div class="card metric"><div class="label">캠페인</div><div class="num" id="mCampaigns">0</div></div>
+    <div class="card metric"><div class="label">광고그룹</div><div class="num" id="mGroups">0</div></div>
+    <div class="card metric"><div class="label">등록 키워드</div><div class="num" id="mKeywordCount">0</div></div>
+    <div class="card metric"><div class="label">ON / OFF</div><div class="num" id="mOnOff">0 / 0</div></div>
+    <div class="card metric"><div class="label">성과 집계기간</div><div class="num" id="mPeriod" style="font-size:17px">미동기화</div></div>
   </div>
 
   <div class="grid4 section">
-    <div class="card metric"><div class="label">최근 14일 키워드 광고비</div><div class="num" id="mCost">₩0</div></div>
-    <div class="card metric"><div class="label">키워드 클릭</div><div class="num" id="mClicks">0</div></div>
+    <div class="card metric"><div class="label">최근 14일 광고비</div><div class="num" id="mCost">₩0</div></div>
+    <div class="card metric"><div class="label">노출</div><div class="num" id="mImpressions">0</div></div>
+    <div class="card metric"><div class="label">클릭</div><div class="num" id="mClicks">0</div></div>
     <div class="card metric"><div class="label">전환</div><div class="num" id="mConv">0</div></div>
-    <div class="card metric"><div class="label">Google 길찾기 + 전화</div><div class="num" id="mLocal">0</div></div>
   </div>
 
   <div class="grid3 section">
-    <div class="card" style="grid-column:span 2"><h2>키워드 성과 · 최근 14일</h2><div class="tablewrap"><table class="table"><thead><tr><th>키워드</th><th>매체</th><th>노출</th><th>클릭</th><th>CTR</th><th>CPC</th><th>비용</th><th>전환</th><th>CPA</th></tr></thead><tbody id="kwRows"></tbody></table></div></div>
-    <div class="card"><h2>CMO Agent 제안</h2><div id="recs"><div class="muted">아직 제안이 없습니다.</div></div></div>
+    <div class="card" style="grid-column:span 2"><h2>키워드 성과 · 광고비 순</h2><div class="tablewrap"><table class="table"><thead><tr><th>키워드</th><th>상태</th><th>입찰가</th><th>그룹입찰</th><th>노출</th><th>클릭</th><th>CTR</th><th>CPC</th><th>비용</th><th>전환</th><th>CPA</th></tr></thead><tbody id="kwRows"></tbody></table></div></div>
+    <div class="card"><h2>CMO Agent 제안</h2><div id="recs"><div class="muted">성과 동기화 후 제안이 생성됩니다.</div></div></div>
   </div>
 
   <div class="grid3 section">
-    <div class="card" style="grid-column:span 2"><h2>실제 검색어 · 최근 14일</h2><div class="tablewrap"><table class="table"><thead><tr><th>검색어</th><th>매체</th><th>노출</th><th>클릭</th><th>비용</th><th>전환</th><th>CPA</th></tr></thead><tbody id="termRows"></tbody></table></div></div>
-    <div class="card"><h2>연결 상태</h2><div class="setup">네이버가 연결되면 먼저 <strong>캠페인 → 광고그룹 → 등록 키워드 → 현재 입찰가</strong>를 가져옵니다.<br><br>그다음 통계/검색어 보고서를 연결해서 실제 광고비와 전환 기준으로 CMO 점수를 계산합니다.</div></div>
+    <div class="card" style="grid-column:span 2"><h2>실제 검색어 · 최근 14일</h2><div class="tablewrap"><table class="table"><thead><tr><th>검색어</th><th>노출</th><th>클릭</th><th>비용</th><th>전환</th><th>CPA</th></tr></thead><tbody id="termRows"></tbody></table></div></div>
+    <div class="card"><h2>다음 단계</h2><div class="setup">1) 네이버 키워드 성과 수집<br>2) 실제 검색어 보고서 연결<br>3) 상품 판매가·원가·마진 연결<br>4) <strong>입찰가/예산 변경 제안 → 승인 → 실행</strong><br><br>광고비만 보고 입찰하지 않고 매출·마진까지 붙인 뒤 자동화합니다.</div></div>
   </div>
 </div>
 <script type="module">
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
 const URL='https://iphxdputdlhfsttlffrz.supabase.co';
 const KEY='sb_publishable_uSCIap8sczT2MNuCXT4zQg_KVkNspU6';
-const sb=createClient(URL,KEY);
-const $=id=>document.getElementById(id);
-const fmt=n=>new Intl.NumberFormat('ko-KR').format(Math.round(Number(n||0)));
-const pct=n=>(Number(n||0)*100).toFixed(1)+'%';
-let lastData=null;
-
-async function showApp(){const {data:{session}}=await sb.auth.getSession();if(!session)return;$('loginView').classList.add('hidden');$('app').classList.remove('hidden');await load();}
-$('loginBtn').onclick=async()=>{const {error}=await sb.auth.signInWithPassword({email:$('email').value.trim(),password:$('password').value});$('loginStatus').textContent=error?error.message:'로그인 완료';if(!error)showApp()};
-$('logoutBtn').onclick=async()=>{await sb.auth.signOut();location.reload()};
-$('refreshBtn').onclick=load;
-$('syncNaverBtn').onclick=syncNaver;
-
-async function load(){
-  const {data:{session}}=await sb.auth.getSession();if(!session)return;
-  const r=await fetch(`${URL}/functions/v1/ads-overview`,{headers:{Authorization:`Bearer ${session.access_token}`}});
-  const d=await r.json();if(!r.ok){alert(d.error||'불러오기 실패');return}lastData=d;render(d);
-}
-
-async function syncNaver(){
-  const id=$('naverCustomerId').value.trim();
-  if(!/^\d+$/.test(id)){$('naverSyncStatus').className='status err';$('naverSyncStatus').textContent='광고 계정 ID 숫자를 입력해 주세요.';return}
-  const {data:{session}}=await sb.auth.getSession();if(!session)return;
-  const btn=$('syncNaverBtn');btn.disabled=true;btn.textContent='동기화 중...';$('naverSyncStatus').className='status';$('naverSyncStatus').textContent='네이버 광고 캠페인과 키워드를 가져오는 중입니다.';
-  try{
-    const r=await fetch(`${URL}/functions/v1/sync-naver-ads`,{method:'POST',headers:{Authorization:`Bearer ${session.access_token}`,'Content-Type':'application/json'},body:JSON.stringify({customer_id:id})});
-    const d=await r.json();
-    if(!r.ok||!d.success)throw new Error(d.error||'네이버 광고 연결 실패');
-    $('naverSyncStatus').className='status ok';$('naverSyncStatus').textContent=`연결 성공! 캠페인 ${d.campaigns}개 · 광고그룹 ${d.adgroups}개 · 키워드 ${d.keywords}개를 가져왔습니다.`;
-    await load();
-  }catch(e){$('naverSyncStatus').className='status err';$('naverSyncStatus').textContent=e.message||String(e)}finally{btn.disabled=false;btn.textContent='연결 · 동기화'}
-}
-
-function render(d){
-  const names={naver_ads:'네이버 검색광고',google_ads:'Google Ads',google_business:'Google Business Profile'};
-  const desc={naver_ads:'파워링크 · 키워드 · 입찰가',google_ads:'검색 · PMax · 예산 · 전환',google_business:'지도 · 전화 · 길찾기 · 리뷰'};
-  $('providers').innerHTML=(d.connections||[]).map(x=>`<div class="card"><div class="provider"><div><b>${names[x.provider]}</b><div class="muted" style="font-size:12px;margin-top:5px">${desc[x.provider]}</div></div><span class="badge ${x.status==='connected'?'ok':x.status==='error'?'err':''}">${x.status==='connected'?'연결됨':x.status==='error'?'오류':'연결 필요'}</span></div><div class="status">${x.account_name||x.account_id||'계정 미연결'} ${x.last_sync_at?'<br>최근 동기화 '+new Date(x.last_sync_at).toLocaleString('ko-KR'):''}${x.last_error?'<br><span style="color:#ff9da2">'+esc(x.last_error)+'</span>':''}</div></div>`).join('');
-  const n=(d.connections||[]).find(x=>x.provider==='naver_ads');if(n?.account_id&&!$('naverCustomerId').value)$('naverCustomerId').value=n.account_id;
-  $('mCost').textContent='₩'+fmt(d.summary?.keyword_cost_krw);$('mClicks').textContent=fmt(d.summary?.keyword_clicks);$('mConv').textContent=fmt(d.summary?.keyword_conversions);$('mLocal').textContent=fmt(Number(d.summary?.gbp_calls||0)+Number(d.summary?.gbp_directions||0));
-  $('kwRows').innerHTML=(d.keywords||[]).length?(d.keywords||[]).map(x=>`<tr><td>${esc(x.keyword)}</td><td>${x.platform==='naver_ads'?'네이버':'Google'}</td><td>${fmt(x.impressions)}</td><td>${fmt(x.clicks)}</td><td>${pct(x.ctr)}</td><td>₩${fmt(x.cpc_krw)}</td><td>₩${fmt(x.cost_krw)}</td><td>${fmt(x.conversions)}</td><td>${x.cpa_krw==null?'—':'₩'+fmt(x.cpa_krw)}</td></tr>`).join(''):`<tr><td colspan="9" class="muted">통계 연결 전입니다. 네이버 계정 연결 후 다음 단계에서 채워집니다.</td></tr>`;
-  $('termRows').innerHTML=(d.search_terms||[]).length?(d.search_terms||[]).map(x=>`<tr><td>${esc(x.search_term)}</td><td>${x.platform==='naver_ads'?'네이버':'Google'}</td><td>${fmt(x.impressions)}</td><td>${fmt(x.clicks)}</td><td>₩${fmt(x.cost_krw)}</td><td>${fmt(x.conversions)}</td><td>${x.cpa_krw==null?'—':'₩'+fmt(x.cpa_krw)}</td></tr>`).join(''):`<tr><td colspan="7" class="muted">검색어 데이터가 아직 없습니다.</td></tr>`;
-  $('recs').innerHTML=(d.recommendations||[]).length?(d.recommendations||[]).map(x=>`<div class="rec"><h3>${esc(x.title)}</h3><p>${esc(x.recommendation)}${x.rationale?'<br><span class="muted">'+esc(x.rationale)+'</span>':''}</p></div>`).join(''):'<div class="muted">광고 성과 데이터가 쌓이면 예산·입찰·키워드 제안을 생성합니다.</div>';
-}
+const sb=createClient(URL,KEY);const $=id=>document.getElementById(id);const fmt=n=>new Intl.NumberFormat('ko-KR').format(Math.round(Number(n||0)));const pct=n=>(Number(n||0)*100).toFixed(1)+'%';
+async function session(){return (await sb.auth.getSession()).data.session}
+async function showApp(){const s=await session();if(!s)return;$('loginView').classList.add('hidden');$('app').classList.remove('hidden');await load()}
+$('loginBtn').onclick=async()=>{const {error}=await sb.auth.signInWithPassword({email:$('email').value.trim(),password:$('password').value});$('loginStatus').textContent=error?error.message:'로그인 완료';if(!error)showApp()};$('logoutBtn').onclick=async()=>{await sb.auth.signOut();location.reload()};$('refreshBtn').onclick=load;$('syncNaverBtn').onclick=syncNaver;$('syncStatsBtn').onclick=syncStats;
+async function load(){const s=await session();if(!s)return;const r=await fetch(`${URL}/functions/v1/ads-overview`,{headers:{Authorization:`Bearer ${s.access_token}`}});const d=await r.json();if(!r.ok){alert(d.error||'불러오기 실패');return}render(d)}
+async function syncNaver(){const id=$('naverCustomerId').value.trim();if(!/^\d+$/.test(id)){setStatus('CUSTOMER_ID 숫자를 입력해 주세요.',true);return}const s=await session();const b=$('syncNaverBtn');b.disabled=true;b.textContent='구조 동기화 중...';setStatus('캠페인·광고그룹·키워드를 가져오는 중입니다. 키워드가 많아 약 1분 걸릴 수 있습니다.');try{const r=await fetch(`${URL}/functions/v1/sync-naver-ads`,{method:'POST',headers:{Authorization:`Bearer ${s.access_token}`,'Content-Type':'application/json'},body:JSON.stringify({customer_id:id})});const d=await r.json();if(!r.ok||!d.success)throw new Error(d.error||'구조 동기화 실패');setStatus(`완료! 캠페인 ${d.campaigns}개 · 광고그룹 ${d.adgroups}개 · 키워드 ${d.keywords}개`,false,true);await load()}catch(e){setStatus(e.message||String(e),true)}finally{b.disabled=false;b.textContent='구조 동기화'}}
+async function syncStats(){const s=await session();const b=$('syncStatsBtn');b.disabled=true;b.textContent='14일 성과 수집 중...';setStatus('네이버에서 최근 14일 키워드별 노출·클릭·광고비·전환을 가져오는 중입니다.');try{const r=await fetch(`${URL}/functions/v1/sync-naver-stats`,{method:'POST',headers:{Authorization:`Bearer ${s.access_token}`,'Content-Type':'application/json'},body:JSON.stringify({lookback_days:14})});const d=await r.json();if(!r.ok||!d.success)throw new Error(d.error||'성과 동기화 실패');setStatus(`성과 완료! ${d.since}~${d.until} · 키워드 ${d.keywords}개 · 클릭 ${fmt(d.clicks)} · 광고비 ₩${fmt(d.cost)} · 전환 ${fmt(d.conversions)}`,false,true);await load()}catch(e){setStatus(e.message||String(e),true)}finally{b.disabled=false;b.textContent='최근 14일 성과 동기화'}}
+function setStatus(t,err=false,ok=false){$('naverSyncStatus').className='status '+(err?'err':ok?'ok':'');$('naverSyncStatus').textContent=t}
+function render(d){const names={naver_ads:'네이버 검색광고',google_ads:'Google Ads',google_business:'Google Business Profile'};const desc={naver_ads:'파워링크 · 키워드 · 입찰가',google_ads:'검색 · PMax · 예산 · 전환',google_business:'지도 · 전화 · 길찾기 · 리뷰'};$('providers').innerHTML=(d.connections||[]).map(x=>`<div class="card"><div class="provider"><div><b>${names[x.provider]}</b><div class="muted" style="font-size:12px;margin-top:5px">${desc[x.provider]}</div></div><span class="badge ${x.status==='connected'?'ok':x.status==='error'?'err':''}">${x.status==='connected'?'연결됨':x.status==='error'?'오류':'연결 필요'}</span></div><div class="status">${esc(x.account_name||x.account_id||'계정 미연결')}${x.last_sync_at?'<br>최근 동기화 '+new Date(x.last_sync_at).toLocaleString('ko-KR'):''}${x.last_error?'<br><span style="color:#ff9da2">'+esc(x.last_error)+'</span>':''}</div></div>`).join('');const n=(d.connections||[]).find(x=>x.provider==='naver_ads');if(n?.account_id)$('naverCustomerId').value=n.account_id;const st=d.naver_structure||{};$('mCampaigns').textContent=fmt(st.campaigns);$('mGroups').textContent=fmt(st.groups);$('mKeywordCount').textContent=fmt(st.keywords);$('mOnOff').textContent=`${fmt(st.keywords_on)} / ${fmt(st.keywords_off)}`;$('mPeriod').textContent=st.latest_period?`${st.latest_period.period_start.slice(5)} ~ ${st.latest_period.period_end.slice(5)}`:'미동기화';$('mCost').textContent='₩'+fmt(d.summary?.keyword_cost_krw);$('mImpressions').textContent=fmt(d.summary?.keyword_impressions);$('mClicks').textContent=fmt(d.summary?.keyword_clicks);$('mConv').textContent=fmt(d.summary?.keyword_conversions);
+$('kwRows').innerHTML=(d.keywords||[]).length?(d.keywords||[]).map(x=>`<tr><td>${esc(x.keyword)}</td><td><span class="pill ${x.status==='on'?'on':'off'}">${x.status==='on'?'ON':'OFF'}</span></td><td>₩${fmt(x.bid_krw)}</td><td>${x.use_group_bid?'예':'아니오'}</td><td>${fmt(x.impressions)}</td><td>${fmt(x.clicks)}</td><td>${pct(x.ctr)}</td><td>${x.cpc_krw==null?'—':'₩'+fmt(x.cpc_krw)}</td><td>₩${fmt(x.cost_krw)}</td><td>${fmt(x.conversions)}</td><td>${x.cpa_krw==null?'—':'₩'+fmt(x.cpa_krw)}</td></tr>`).join(''):`<tr><td colspan="11" class="muted">키워드 데이터가 없습니다.</td></tr>`;
+$('termRows').innerHTML=(d.search_terms||[]).length?(d.search_terms||[]).map(x=>`<tr><td>${esc(x.search_term)}</td><td>${fmt(x.impressions)}</td><td>${fmt(x.clicks)}</td><td>₩${fmt(x.cost_krw)}</td><td>${fmt(x.conversions)}</td><td>${x.cpa_krw==null?'—':'₩'+fmt(x.cpa_krw)}</td></tr>`).join(''):`<tr><td colspan="6" class="muted">검색어 보고서는 다음 단계에서 연결됩니다.</td></tr>`;
+$('recs').innerHTML=(d.recommendations||[]).length?(d.recommendations||[]).map(x=>`<div class="rec"><h3>${esc(x.title)}</h3><p>${esc(x.recommendation)}${x.rationale?'<br><br>'+esc(x.rationale):''}</p></div>`).join(''):'<div class="muted">성과 동기화 후 CMO 제안이 생성됩니다.</div>'}
 function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
 showApp();
 </script>
