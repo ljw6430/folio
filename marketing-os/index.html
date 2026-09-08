@@ -3,128 +3,172 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<meta name="theme-color" content="#17080b" />
 <title>지원이네 Marketing OS</title>
 <style>
-:root{--bg:#07111f;--panel:#0d1b2d;--panel2:#12243a;--line:#213754;--text:#f6f8fb;--muted:#91a2b8;--blue:#47a9ff;--mint:#38d9b0;--red:#ff6b73;--amber:#ffc857}
-*{box-sizing:border-box}body{margin:0;background:linear-gradient(160deg,#06101d,#0a1728 55%,#08111d);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Pretendard,"Noto Sans KR",sans-serif;min-height:100vh}
-button,input,textarea{font:inherit}.hidden{display:none!important}.shell{display:grid;grid-template-columns:240px 1fr;min-height:100vh}.side{border-right:1px solid var(--line);padding:24px 16px;background:rgba(5,13,24,.86);position:sticky;top:0;height:100vh}.brand{font-size:22px;font-weight:900;letter-spacing:-.5px}.brand small{display:block;font-size:11px;color:var(--mint);letter-spacing:1.5px;margin-top:5px}.nav{margin-top:28px;display:grid;gap:7px}.nav button{width:100%;text-align:left;border:0;background:transparent;color:var(--muted);padding:12px 14px;border-radius:12px;cursor:pointer}.nav button.active,.nav button:hover{background:var(--panel2);color:white}.sidefoot{position:absolute;bottom:20px;left:16px;right:16px}.ghost{background:transparent!important;border:1px solid var(--line)!important;color:var(--muted)!important}
-.main{padding:28px;max-width:1500px;width:100%}.top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:24px}.top h1{margin:0;font-size:30px;letter-spacing:-1px}.top p{color:var(--muted);margin:7px 0 0}.badge{border:1px solid rgba(56,217,176,.35);color:var(--mint);background:rgba(56,217,176,.08);padding:8px 12px;border-radius:999px;font-size:13px;font-weight:700}
-.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}.card{background:linear-gradient(180deg,rgba(18,36,58,.95),rgba(12,26,44,.95));border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 18px 40px rgba(0,0,0,.15)}.metric .label{color:var(--muted);font-size:13px}.metric .num{font-size:31px;font-weight:900;margin-top:7px}.metric .sub{font-size:12px;color:var(--muted);margin-top:4px}
-.two{display:grid;grid-template-columns:1.1fr .9fr;gap:14px;margin-top:14px}.card h2{font-size:17px;margin:0 0 15px}.hero{padding:22px;background:radial-gradient(circle at 90% 10%,rgba(71,169,255,.18),transparent 42%),linear-gradient(180deg,rgba(18,36,58,.98),rgba(12,26,44,.98))}.hero strong{font-size:25px}.hero p{color:var(--muted);line-height:1.7}.actionbar{display:flex;gap:9px;flex-wrap:wrap;margin-top:15px}.btn{border:0;border-radius:11px;padding:11px 15px;font-weight:800;cursor:pointer;background:var(--blue);color:#06101d}.btn.secondary{background:var(--panel2);color:white;border:1px solid var(--line)}.btn.green{background:var(--mint)}.btn.red{background:rgba(255,107,115,.15);color:#ff9ca2;border:1px solid rgba(255,107,115,.25)}
-.section{display:none}.section.active{display:block}.formrow{display:grid;grid-template-columns:1fr auto;gap:10px}.input,textarea{width:100%;background:#081522;border:1px solid var(--line);color:white;border-radius:12px;padding:12px;outline:none}.input:focus,textarea:focus{border-color:#3d86c4}textarea{min-height:330px;resize:vertical;line-height:1.55}.muted{color:var(--muted)}.status{font-size:13px;margin-top:10px}.status.ok{color:var(--mint)}.status.err{color:#ff9ca2}.products{display:grid;gap:8px;margin-top:12px}.prod{display:grid;grid-template-columns:1fr auto auto;gap:12px;align-items:center;border:1px solid var(--line);background:#091725;border-radius:12px;padding:12px}.prod b{font-size:14px}.prod small{display:block;color:var(--muted);margin-top:3px}.price{font-weight:900}.pill{font-size:11px;padding:5px 8px;border-radius:999px;background:rgba(56,217,176,.09);color:var(--mint)}.pill.sold{color:#ff9ca2;background:rgba(255,107,115,.1)}
-.loginWrap{min-height:100vh;display:grid;place-items:center;padding:24px}.login{width:min(430px,100%);background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:28px}.login h1{margin:0 0 7px}.login p{color:var(--muted);margin:0 0 23px}.login .input{margin-bottom:10px}.login .btn{width:100%;margin-top:5px}.tiny{font-size:11px;color:var(--muted);line-height:1.5;margin-top:12px}.empty{padding:35px;text-align:center;border:1px dashed var(--line);border-radius:14px;color:var(--muted)}
-.adsEmbed{width:100%;height:calc(100vh - 130px);min-height:760px;border:1px solid var(--line);border-radius:18px;background:#06101d;display:block}
-@media(max-width:900px){.shell{display:block}.side{position:static;height:auto;border-right:0;border-bottom:1px solid var(--line);padding:15px}.brand small,.sidefoot{display:none}.nav{margin-top:12px;display:flex;overflow:auto}.nav button{white-space:nowrap;width:auto}.main{padding:18px}.grid4{grid-template-columns:repeat(2,1fr)}.two{grid-template-columns:1fr}.top{align-items:center}.top h1{font-size:24px}.adsEmbed{height:calc(100vh - 180px);min-height:700px}}
-@media(max-width:520px){.grid4{grid-template-columns:1fr 1fr}.metric .num{font-size:25px}.main{padding:14px}.prod{grid-template-columns:1fr auto}.prod .pill{grid-column:2}.formrow{grid-template-columns:1fr}.adsEmbed{min-height:760px}}
+:root{
+  --bg:#0d0507;--bg2:#16080b;--panel:#1b0c10;--panel2:#261116;--panel3:#32151c;
+  --line:#4a2029;--line2:#6a2b37;--text:#fff7f5;--muted:#c5a9aa;
+  --red:#ff4d5e;--red2:#ff7668;--rose:#ff9a9f;--gold:#f1b85b;--mint:#54d6a3;--blue:#7fb8ff;
+  --shadow:0 18px 55px rgba(0,0,0,.34)
+}
+*{box-sizing:border-box}html{background:var(--bg)}body{margin:0;background:radial-gradient(circle at 82% 0%,rgba(191,35,58,.18),transparent 33%),linear-gradient(145deg,#0d0507,#16080b 48%,#0b0507);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Pretendard,"Noto Sans KR",sans-serif;min-height:100vh}
+button,input,textarea,select{font:inherit}.hidden{display:none!important}.shell{display:grid;grid-template-columns:230px minmax(0,1fr);min-height:100vh}.side{position:sticky;top:0;height:100vh;padding:22px 14px;border-right:1px solid var(--line);background:linear-gradient(180deg,rgba(24,8,12,.98),rgba(13,5,7,.98));z-index:20}.brand{padding:8px 10px 18px;font-size:22px;font-weight:950;letter-spacing:-.6px}.brand .dot{color:var(--red)}.brand small{display:block;color:var(--rose);font-size:10px;letter-spacing:1.6px;margin-top:6px;font-weight:900}.nav{display:grid;gap:6px}.nav button{width:100%;min-height:45px;border:1px solid transparent;background:transparent;color:#d2b9ba;text-align:left;border-radius:13px;padding:11px 13px;cursor:pointer;font-weight:800;transition:.18s}.nav button:hover{background:rgba(255,77,94,.07);color:white}.nav button.active{background:linear-gradient(135deg,rgba(255,77,94,.2),rgba(255,118,104,.08));border-color:rgba(255,77,94,.35);color:white;box-shadow:inset 3px 0 0 var(--red)}.nav .mainNav{font-size:14px}.nav .subNav{font-size:12px}.sidefoot{position:absolute;left:14px;right:14px;bottom:calc(16px + env(safe-area-inset-bottom))}
+.main{width:100%;max-width:1550px;padding:24px 26px 42px}.section{display:none}.section.active{display:block}.top{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;margin-bottom:18px}.top h1{margin:0;font-size:28px;letter-spacing:-1px}.top p{margin:6px 0 0;color:var(--muted);font-size:13px;line-height:1.55}.eyebrow{font-size:10px;color:var(--rose);font-weight:950;letter-spacing:1.4px;margin-bottom:7px}.badge{display:inline-flex;align-items:center;gap:6px;border:1px solid rgba(255,77,94,.35);color:#ffd4d7;background:rgba(255,77,94,.09);padding:7px 10px;border-radius:999px;font-size:11px;font-weight:900;white-space:nowrap}.badge.ok{color:#aaf0d2;border-color:rgba(84,214,163,.35);background:rgba(84,214,163,.08)}.badge.gold{color:#ffd897;border-color:rgba(241,184,91,.35);background:rgba(241,184,91,.08)}
+.card{background:linear-gradient(180deg,rgba(35,15,20,.96),rgba(24,10,14,.96));border:1px solid var(--line);border-radius:18px;padding:17px;box-shadow:var(--shadow)}.card.soft{box-shadow:none}.card h2{margin:0 0 12px;font-size:15px}.hero{background:radial-gradient(circle at 88% 14%,rgba(255,77,94,.25),transparent 38%),linear-gradient(145deg,#2a1118,#180b0e);border-color:rgba(255,77,94,.34)}.hero strong{display:block;font-size:25px;letter-spacing:-.7px}.hero p{color:#d7bcbd;font-size:12px;line-height:1.65;max-width:750px}.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.grid5{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}.metric .label{font-size:11px;color:var(--muted)}.metric .num{font-size:26px;font-weight:950;margin-top:5px}.metric .sub{font-size:10px;color:#9f8587;margin-top:4px}.stack{display:grid;gap:10px}.rowcard{border:1px solid var(--line);border-radius:14px;background:#15080c;padding:12px}.rowcard b{font-size:13px}.rowcard small{display:block;color:var(--muted);font-size:11px;line-height:1.5;margin-top:4px}.kpi{display:flex;gap:12px;align-items:center;justify-content:space-between}.kpi .v{font-weight:950;color:#ffd5d8}.empty{padding:28px;text-align:center;border:1px dashed #5a2932;border-radius:14px;color:var(--muted);font-size:12px;line-height:1.65}.muted{color:var(--muted)}.tiny{font-size:10px;color:#a88d8f;line-height:1.55}.status{font-size:12px;margin-top:9px;white-space:pre-wrap}.status.ok{color:var(--mint)}.status.err{color:#ff9ba3}.pill{display:inline-block;padding:5px 8px;border-radius:999px;font-size:10px;font-weight:900;background:rgba(255,77,94,.1);color:#ffb3ba}.pill.ok{background:rgba(84,214,163,.1);color:#9becc8}.pill.gold{background:rgba(241,184,91,.1);color:#ffd797}
+.btn{min-height:42px;border:0;border-radius:12px;padding:10px 14px;font-weight:900;cursor:pointer;background:linear-gradient(135deg,var(--red),var(--red2));color:#1a0609;box-shadow:0 8px 20px rgba(255,77,94,.16)}.btn.secondary{background:var(--panel2);border:1px solid var(--line);color:white;box-shadow:none}.btn.ghost{background:transparent;border:1px solid var(--line);color:#d4b9ba;box-shadow:none}.btn.green{background:var(--mint);color:#06140e}.btn.gold{background:var(--gold);color:#1b1103}.btn:disabled{opacity:.5;cursor:wait}.actions{display:flex;gap:8px;flex-wrap:wrap}.input,textarea,select{width:100%;background:#100609;border:1px solid #54242e;color:white;border-radius:12px;padding:11px 12px;outline:none}.input:focus,textarea:focus,select:focus{border-color:var(--red)}textarea{min-height:120px;resize:vertical;line-height:1.55}.formgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.formgrid .full{grid-column:1/-1}.toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.tablewrap{overflow:auto;border:1px solid var(--line);border-radius:14px}.table{width:100%;border-collapse:collapse;min-width:760px}.table th,.table td{padding:10px 9px;border-bottom:1px solid #3c1b22;font-size:11px;text-align:right}.table th:first-child,.table td:first-child{text-align:left}.table th{color:#b99ea0;background:#16090d;position:sticky;top:0}.products{display:grid;gap:8px}.prod{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:12px;align-items:center;border:1px solid var(--line);background:#15080c;border-radius:14px;padding:12px}.prod b{font-size:13px}.prod small{display:block;color:var(--muted);font-size:10px;margin-top:4px}.price{font-weight:950}.adsWrap{background:linear-gradient(180deg,#17090d,#0f0608);border:1px solid #51232c;border-radius:20px;padding:8px;box-shadow:var(--shadow)}.adsEmbed{width:100%;height:calc(100vh - 115px);min-height:760px;border:0;border-radius:15px;background:#0d0507;display:block}.quicklink{cursor:pointer}.sectionGap{margin-top:12px}.loginWrap{min-height:100vh;display:grid;place-items:center;padding:22px}.login{width:min(430px,100%);background:linear-gradient(180deg,#241015,#15080b);border:1px solid #5b2732;border-radius:24px;padding:26px;box-shadow:0 30px 100px rgba(0,0,0,.5)}.login h1{margin:0 0 7px}.login p{color:var(--muted);margin:0 0 20px}.login .input{margin-bottom:9px}.login .btn{width:100%}.mobileTop{display:none}
+@media(max-width:1100px){.grid5{grid-template-columns:repeat(3,1fr)}.grid4{grid-template-columns:repeat(2,1fr)}.grid3{grid-template-columns:1fr 1fr}}
+@media(max-width:780px){
+  .shell{display:block}.side{position:sticky;top:0;height:auto;padding:10px 10px 8px;border-right:0;border-bottom:1px solid var(--line);z-index:30}.brand{padding:2px 7px 7px;font-size:18px}.brand small{display:none}.nav{display:flex;overflow-x:auto;gap:6px;padding-bottom:2px;scrollbar-width:none}.nav::-webkit-scrollbar{display:none}.nav button{flex:0 0 auto;width:auto;min-height:40px;padding:8px 11px;text-align:center;border-radius:999px;font-size:11px!important}.nav button.active{box-shadow:none;border-color:rgba(255,77,94,.45)}.sidefoot{display:none}.main{padding:14px 12px calc(22px + env(safe-area-inset-bottom))}.top{margin-bottom:13px}.top h1{font-size:23px}.top p{font-size:11px}.grid2,.grid3{grid-template-columns:1fr}.grid5{grid-template-columns:repeat(2,1fr)}.card{padding:14px;border-radius:16px}.hero strong{font-size:21px}.formgrid{grid-template-columns:1fr}.prod{grid-template-columns:minmax(0,1fr) auto}.prod .pill{grid-column:2}.adsWrap{padding:3px;border-radius:16px}.adsEmbed{height:calc(100vh - 112px);min-height:720px;border-radius:13px}.btn{min-height:44px}.metric .num{font-size:22px}
+}
+@media(max-width:430px){.grid4,.grid5{grid-template-columns:1fr 1fr}.metric .num{font-size:20px}.card{padding:12px}.main{padding-left:9px;padding-right:9px}}
 </style>
 </head>
 <body>
 <div id="loginView" class="loginWrap">
   <div class="login">
-    <div class="badge" style="display:inline-block;margin-bottom:15px">JIWONINE · CMO AGENT</div>
+    <div class="eyebrow">JIWONINE · MARKETING CONTROL</div>
     <h1>지원이네 Marketing OS</h1>
-    <p>리뷰·콘텐츠·광고를 한 곳에서 운영합니다.</p>
+    <p>광고·리뷰·상품·콘텐츠를 한 곳에서 운영합니다.</p>
     <input id="email" class="input" type="email" placeholder="이메일" autocomplete="username">
     <input id="password" class="input" type="password" placeholder="비밀번호" autocomplete="current-password">
     <button id="loginBtn" class="btn">로그인</button>
     <div id="loginStatus" class="status"></div>
-    <div class="tiny">Supabase에 만든 관리자 계정으로 로그인하세요. OpenAI 비밀키는 브라우저에 저장되지 않습니다.</div>
   </div>
 </div>
 
 <div id="appView" class="shell hidden">
   <aside class="side">
-    <div class="brand">지원이네 <small>MARKETING OS · v0.1</small></div>
+    <div class="brand">지원이네<span class="dot">.</span><small>MARKETING OS · OWNER MODE</small></div>
     <div class="nav">
-      <button class="active" data-tab="dashboard">대시보드</button>
-      <button data-tab="sync">인어교주 동기화</button>
-      <button data-tab="products">상품 DB</button>
-      <button data-tab="inventory">오늘의 수산물</button>
-      <button data-tab="reviews">리뷰센터</button>
-      <button data-tab="content">콘텐츠센터</button>
-      <button data-tab="ads">광고 지휘센터</button>
-      <button data-tab="agent">CMO Agent</button>
+      <button class="mainNav active" data-tab="ads">🔥 광고 지휘센터</button>
+      <button class="mainNav" data-tab="dashboard">대시보드</button>
+      <button class="mainNav" data-tab="agent">CMO Agent</button>
+      <button class="subNav" data-tab="inventory">오늘의 수산물</button>
+      <button class="subNav" data-tab="reviews">리뷰센터</button>
+      <button class="subNav" data-tab="content">콘텐츠센터</button>
+      <button class="subNav" data-tab="products">상품 DB</button>
+      <button class="subNav" data-tab="sync">인어교주 동기화</button>
     </div>
     <div class="sidefoot"><button id="logoutBtn" class="btn ghost" style="width:100%">로그아웃</button></div>
   </aside>
 
   <main class="main">
-    <section id="dashboard" class="section active">
-      <div class="top"><div><h1>오늘의 마케팅</h1><p id="businessLine">지원이네 데이터를 불러오는 중...</p></div><span class="badge">● 시스템 정상</span></div>
-      <div class="grid4">
-        <div class="card metric"><div class="label">등록 상품</div><div id="mProducts" class="num">—</div><div class="sub">인어교주 상품 DB</div></div>
-        <div class="card metric"><div class="label">누적 리뷰</div><div id="mReviews" class="num">—</div><div class="sub">통합 리뷰센터</div></div>
-        <div class="card metric"><div class="label">콘텐츠 초안</div><div id="mContents" class="num">—</div><div class="sub">인스타·블로그</div></div>
-        <div class="card metric"><div class="label">AI 제안</div><div id="mIdeas" class="num">—</div><div class="sub">승인 대기</div></div>
+    <section id="ads" class="section active">
+      <div class="top"><div><div class="eyebrow">OWNER'S FIRST SCREEN</div><h1>광고 지휘센터</h1><p>사장 보고서 → OK / NO → 승인된 작업만 실제 광고계정에 실행</p></div><span class="badge">NAVER · GOOGLE</span></div>
+      <div class="adsWrap"><iframe id="adsFrame" class="adsEmbed" src="./ads.html" title="지원이네 광고 지휘센터"></iframe></div>
+    </section>
+
+    <section id="dashboard" class="section">
+      <div class="top"><div><div class="eyebrow">OWNER DASHBOARD</div><h1>대시보드</h1><p id="businessLine">지원이네 데이터를 불러오는 중...</p></div><button class="btn secondary" onclick="loadDashboard()">새로고침</button></div>
+      <div class="grid5">
+        <div class="card metric"><div class="label">NAVER 광고비</div><div id="dNaverCost" class="num">—</div><div class="sub">최근 동기화</div></div>
+        <div class="card metric"><div class="label">통합 클릭</div><div id="dClicks" class="num">—</div><div class="sub">NAVER + Google</div></div>
+        <div class="card metric"><div class="label">승인 대기</div><div id="dPending" class="num">—</div><div class="sub">사장 OK 필요</div></div>
+        <div class="card metric"><div class="label">누적 리뷰</div><div id="dReviews" class="num">—</div><div class="sub">통합 리뷰 DB</div></div>
+        <div class="card metric"><div class="label">상품 DB</div><div id="dProducts" class="num">—</div><div class="sub">현재 등록 상품</div></div>
       </div>
-      <div class="two">
-        <div class="card hero"><h2>CMO Agent</h2><strong>데이터 연결을 시작합니다.</strong><p>먼저 인어교주 현재 메뉴를 동기화하면 실제 판매상품·가격·품절 상태를 기준으로 리뷰, 인스타그램, 블로그, 광고 판단을 연결할 수 있습니다.</p><div class="actionbar"><button class="btn green" onclick="openTab('sync')">인어교주 메뉴 동기화</button><button class="btn secondary" onclick="openTab('inventory')">오늘 상태 입력</button></div></div>
-        <div class="card"><h2>운영 원칙</h2><p class="muted" style="line-height:1.8">✓ 광고비 변경은 승인 후 실행<br>✓ 부정 리뷰 답변은 승인 필수<br>✓ 가격은 상품 DB 기준으로만 사용<br>✓ Instagram 자동게시 초기 OFF<br>✓ 변경 이력은 DB에 기록</p></div>
+      <div class="grid2 sectionGap">
+        <div class="card hero quicklink" onclick="openTab('ads')"><div class="eyebrow">오늘 제일 먼저 볼 곳</div><strong id="dHeadline">광고비서 보고서를 확인하세요.</strong><p id="dSummary">광고 성과와 승인 대기 제안을 요약하고 있습니다.</p><div class="actions"><button class="btn">광고 보고서 열기</button></div></div>
+        <div class="card"><h2>운영 현황</h2><div id="dConnections" class="stack"><div class="muted">연결 상태 확인 중...</div></div></div>
       </div>
+      <div class="grid3 sectionGap">
+        <div class="card"><h2>최근 상위 검색어</h2><div id="dTerms" class="stack"></div></div>
+        <div class="card"><h2>AI 제안</h2><div id="dIdeas" class="stack"></div></div>
+        <div class="card"><h2>데이터 축적</h2><div class="rowcard"><b>1일 · 7일 · 30일</b><small>광고 보고, 사장 결정, 실행 결과를 장기적으로 축적해 지원이네 전용 마케팅 판단 데이터로 발전시키는 구조입니다.</small></div><div class="rowcard"><b>원칙</b><small>조회·분석은 자동, 돈이 움직이는 변경은 사장 승인 후 실행.</small></div></div>
+      </div>
+    </section>
+
+    <section id="agent" class="section">
+      <div class="top"><div><div class="eyebrow">AI CMO</div><h1>CMO Agent</h1><p>관찰 → 분석 → 제안 → 사장 승인 → 실행 → 결과 측정</p></div><button class="btn secondary" onclick="loadAgent()">새로고침</button></div>
+      <div class="grid2">
+        <div class="card"><h2>AI 추천</h2><div id="agentIdeas" class="stack"></div></div>
+        <div class="card"><h2>실행 승인 대기</h2><div id="agentActions" class="stack"></div></div>
+      </div>
+    </section>
+
+    <section id="inventory" class="section">
+      <div class="top"><div><div class="eyebrow">DAILY SEAFOOD SIGNAL</div><h1>오늘의 수산물</h1><p>오늘 상태·재고·원가 메모를 DB에 쌓아 광고/콘텐츠 우선순위 판단에 사용합니다.</p></div><button class="btn secondary" onclick="loadInventory()">새로고침</button></div>
+      <div class="grid2">
+        <div class="card"><h2>오늘 상태 입력</h2><div class="formgrid">
+          <div class="full"><label class="tiny">상품</label><select id="invProduct"></select></div>
+          <div><label class="tiny">판매 상태</label><select id="invStatus"><option value="available">판매중</option><option value="limited">소량</option><option value="sold_out">품절</option><option value="excellent">상태 최상</option></select></div>
+          <div><label class="tiny">상태 점수</label><input id="invScore" class="input" type="number" min="1" max="5" value="4"></div>
+          <div><label class="tiny">수량/재고</label><input id="invQty" class="input" inputmode="decimal" placeholder="예: 20"></div>
+          <div><label class="tiny">원가</label><input id="invCost" class="input" inputmode="numeric" placeholder="예: 18000"></div>
+          <div class="full"><label class="tiny">메모</label><textarea id="invNote" placeholder="예: 활새우 상태 최상, 오늘 적극 홍보 / 꽃게 살수율 좋음"></textarea></div>
+        </div><button id="saveInvBtn" class="btn" style="width:100%;margin-top:10px">오늘 상태 DB 저장</button><div id="invStatusMsg" class="status"></div></div>
+        <div class="card"><h2>최근 입력 기록</h2><div id="inventoryList" class="stack"></div></div>
+      </div>
+    </section>
+
+    <section id="reviews" class="section">
+      <div class="top"><div><div class="eyebrow">REPUTATION DESK</div><h1>리뷰센터</h1><p>NAVER · Google · 인어교주 리뷰를 한 곳에서 확인하고 AI 분석 결과를 봅니다.</p></div><div class="actions"><button class="btn secondary" onclick="loadReviews()">새로고침</button><button class="btn" onclick="openTab('ads')">Google 리뷰 동기화</button></div></div>
+      <div class="grid4"><div class="card metric"><div class="label">리뷰 수</div><div id="rvCount" class="num">—</div></div><div class="card metric"><div class="label">평균 평점</div><div id="rvAvg" class="num">—</div></div><div class="card metric"><div class="label">답글 대기</div><div id="rvPending" class="num">—</div></div><div class="card metric"><div class="label">최근 부정 신호</div><div id="rvNegative" class="num">—</div></div></div>
+      <div class="card sectionGap"><div id="reviewList" class="stack"></div></div>
+    </section>
+
+    <section id="content" class="section">
+      <div class="top"><div><div class="eyebrow">CONTENT DESK</div><h1>콘텐츠센터</h1><p>Instagram · 네이버 블로그 · 매장 공지 초안을 DB에서 관리합니다.</p></div><button class="btn secondary" onclick="loadContent()">새로고침</button></div>
+      <div class="grid2">
+        <div class="card"><h2>초안 빠른 저장</h2><div class="formgrid"><div><label class="tiny">채널</label><select id="ctPlatform"><option value="instagram">Instagram</option><option value="naver_blog">NAVER Blog</option><option value="naver_place">NAVER Place</option></select></div><div><label class="tiny">제목</label><input id="ctTitle" class="input" placeholder="제목"></div><div class="full"><label class="tiny">내용</label><textarea id="ctBody" placeholder="오늘 홍보할 내용이나 AI 초안 메모"></textarea></div></div><button id="saveContentBtn" class="btn" style="width:100%;margin-top:10px">콘텐츠 초안 DB 저장</button><div id="contentStatus" class="status"></div></div>
+        <div class="card"><h2>최근 초안</h2><div id="contentList" class="stack"></div></div>
+      </div>
+    </section>
+
+    <section id="products" class="section">
+      <div class="top"><div><div class="eyebrow">PRODUCT MASTER</div><h1>상품 DB</h1><p>Marketing OS가 광고·콘텐츠 판단에 참고하는 실제 판매 상품입니다.</p></div><button class="btn secondary" onclick="loadProducts()">새로고침</button></div>
+      <div class="card"><div id="productList" class="products"></div></div>
     </section>
 
     <section id="sync" class="section">
-      <div class="top"><div><h1>인어교주 메뉴 동기화</h1><p>현재 지원이네 매장 페이지 내용을 붙여넣으면 AI가 상품을 구조화합니다.</p></div><span class="badge">STORE 0000000310</span></div>
+      <div class="top"><div><div class="eyebrow">TPIRATES IMPORT</div><h1>인어교주 동기화</h1><p>지원이네 매장 메뉴 원문을 붙여넣으면 AI가 상품·가격·품절 상태를 구조화합니다.</p></div><span class="badge gold">STORE 0000000310</span></div>
       <div class="card">
-        <div class="formrow"><input id="tpUrl" class="input" value="https://tpirates.com/store/0000000310"><button id="openTp" class="btn secondary">매장 페이지 열기</button></div>
-        <p class="tiny">인어교주 페이지에서 전체 메뉴 영역을 복사해 아래에 붙여넣으세요. 중복 노출된 상품은 AI가 하나로 합칩니다.</p>
-        <textarea id="rawText" placeholder="여기에 인어교주해적단 지원이네 메뉴 내용을 붙여넣으세요..."></textarea>
-        <div class="actionbar"><button id="analyzeBtn" class="btn">AI 분석하기</button><button id="applyBtn" class="btn green hidden">분석 결과 DB 반영</button></div>
-        <div id="syncStatus" class="status"></div>
+        <div class="formgrid"><div class="full"><input id="tpUrl" class="input" value="https://tpirates.com/store/0000000310"></div><div class="full"><button id="openTp" class="btn secondary">인어교주 매장 페이지 열기</button></div></div>
+        <textarea id="rawText" style="min-height:270px;margin-top:10px" placeholder="인어교주해적단 지원이네 메뉴 전체 내용을 붙여넣으세요..."></textarea>
+        <div class="actions" style="margin-top:10px"><button id="analyzeBtn" class="btn">AI 분석하기</button><button id="applyBtn" class="btn green hidden">분석 결과 DB 반영</button></div><div id="syncStatus" class="status"></div>
       </div>
-      <div id="analysisCard" class="card hidden" style="margin-top:14px"><h2>분석 결과 <span id="detected" class="muted"></span></h2><div id="analysisProducts" class="products"></div></div>
+      <div id="analysisCard" class="card hidden sectionGap"><h2>분석 결과 <span id="detected" class="muted"></span></h2><div id="analysisProducts" class="products"></div></div>
     </section>
-
-    <section id="products" class="section"><div class="top"><div><h1>상품 DB</h1><p>Marketing OS가 참고하는 실제 판매상품입니다.</p></div><button class="btn secondary" onclick="loadProducts()">새로고침</button></div><div class="card"><div id="productList" class="products"></div></div></section>
-    <section id="inventory" class="section"><div class="top"><div><h1>오늘의 수산물</h1><p>v0.2에서 상품 상태·재고·원가 흐름 입력 UI가 연결됩니다.</p></div></div><div class="empty">다음 구현: “활새우 상태 최상 / 꽃게 살수율 좋음 / 줄전갱이 소량” 입력 → CMO 홍보 우선순위 계산</div></section>
-    <section id="reviews" class="section"><div class="top"><div><h1>리뷰센터</h1><p>네이버 · Google · 인어교주 리뷰 분석/답글</p></div></div><div class="empty">다음 구현: 리뷰 붙여넣기/수집 → 감성분석 → 답글 → 인스타 활용점수</div></section>
-    <section id="content" class="section"><div class="top"><div><h1>콘텐츠센터</h1><p>Instagram 하루 1피드 · 네이버 블로그 초안</p></div></div><div class="empty">다음 구현: 오늘 상품 + 리뷰 + 제철 데이터를 이용해 매일 콘텐츠 생성</div></section>
-    <section id="ads" class="section"><div class="top"><div><h1>광고 지휘센터</h1><p>네이버 검색광고 · Google Ads · Google Business Profile</p></div><span class="badge">통합 광고 관리</span></div><iframe class="adsEmbed" src="./ads.html" title="지원이네 광고 지휘센터"></iframe></section>
-    <section id="agent" class="section"><div class="top"><div><h1>CMO Agent</h1><p>관찰 → 분석 → 제안 → 승인 → 실행</p></div></div><div class="empty">상품·리뷰·콘텐츠·광고 데이터가 연결되면 오늘의 마케팅 전략을 자동 제안합니다.</div></section>
   </main>
 </div>
 
 <script type="module">
-import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
-const SUPABASE_URL='https://iphxdputdlhfsttlffrz.supabase.co';
-const SUPABASE_KEY='sb_publishable_uSCIap8sczT2MNuCXT4zQg_KVkNspU6';
-const sb=createClient(SUPABASE_URL,SUPABASE_KEY);
-let business=null,currentImportId=null;
-const $=id=>document.getElementById(id);
-const fmt=v=>v==null?'—':Number(v).toLocaleString('ko-KR');
-
-async function init(){const {data:{session}}=await sb.auth.getSession(); if(session) showApp(); else showLogin();}
+import{createClient}from'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+const URL='https://iphxdputdlhfsttlffrz.supabase.co',KEY='sb_publishable_uSCIap8sczT2MNuCXT4zQg_KVkNspU6';
+const sb=createClient(URL,KEY),$=id=>document.getElementById(id),fmt=n=>new Intl.NumberFormat('ko-KR').format(Math.round(Number(n||0))),money=n=>'₩'+fmt(n),esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+let business=null,currentImportId=null,openApiSpec=null;
+async function sess(){return(await sb.auth.getSession()).data.session}
+async function api(path,opt={}){const s=await sess();if(!s)throw new Error('로그인이 필요합니다.');const r=await fetch(`${URL}/functions/v1/${path}`,{...opt,headers:{Authorization:`Bearer ${s.access_token}`,'Content-Type':'application/json',...(opt.headers||{})}});let d={};try{d=await r.json()}catch{}if(!r.ok||d.success===false){const e=new Error(d.error||`${path} 실패`);e.data=d;throw e}return d}
+async function count(table){if(!business)return 0;const{count}=await sb.from(table).select('*',{count:'exact',head:true}).eq('business_id',business.id);return count||0}
+async function loadBusiness(){const{data,error}=await sb.from('businesses').select('*').limit(1).single();if(error)throw error;business=data;$('businessLine').textContent=`${data.name} · ${data.brand_name||''} · 사장 승인형 운영`;return data}
+async function init(){const s=await sess();if(!s){showLogin();return}showApp();try{await loadBusiness();await Promise.all([loadDashboard(),loadProducts()])}catch(e){console.error(e)}}
 function showLogin(){$('loginView').classList.remove('hidden');$('appView').classList.add('hidden')}
-async function showApp(){$('loginView').classList.add('hidden');$('appView').classList.remove('hidden'); await loadBusiness(); await Promise.all([loadCounts(),loadProducts()]);}
-$('loginBtn').onclick=async()=>{const email=$('email').value.trim(),password=$('password').value; $('loginStatus').textContent='로그인 중...'; const {error}=await sb.auth.signInWithPassword({email,password}); if(error){$('loginStatus').textContent=error.message;$('loginStatus').className='status err';return} $('loginStatus').textContent='';showApp()};
-$('logoutBtn').onclick=async()=>{await sb.auth.signOut();showLogin()};
+function showApp(){$('loginView').classList.add('hidden');$('appView').classList.remove('hidden')}
+$('loginBtn').onclick=async()=>{const{error}=await sb.auth.signInWithPassword({email:$('email').value.trim(),password:$('password').value});$('loginStatus').textContent=error?error.message:'';if(!error)init()};$('logoutBtn').onclick=async()=>{await sb.auth.signOut();location.reload()};
+window.openTab=(id)=>{document.querySelectorAll('.section').forEach(x=>x.classList.toggle('active',x.id===id));document.querySelectorAll('.nav button').forEach(x=>x.classList.toggle('active',x.dataset.tab===id));const f={dashboard:loadDashboard,agent:loadAgent,inventory:loadInventory,reviews:loadReviews,content:loadContent,products:loadProducts};if(f[id])f[id]();window.scrollTo({top:0,behavior:'smooth'})};document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>openTab(b.dataset.tab));
 
-async function loadBusiness(){const {data,error}=await sb.from('businesses').select('*').limit(1).single(); if(error){$('businessLine').textContent='사업장 조회 실패: '+error.message;return} business=data;$('businessLine').textContent=`${data.name} · ${data.brand_name||''} · 승인형 자동화 모드`;}
-async function count(table,extra){let q=sb.from(table).select('*',{count:'exact',head:true}); if(extra) q=extra(q); const {count}=await q; return count??0;}
-async function loadCounts(){$('mProducts').textContent=fmt(await count('products',q=>business?q.eq('business_id',business.id):q));$('mReviews').textContent=fmt(await count('reviews',q=>business?q.eq('business_id',business.id):q));$('mContents').textContent=fmt(await count('content_drafts',q=>business?q.eq('business_id',business.id):q));$('mIdeas').textContent=fmt(await count('ai_recommendations',q=>business?q.eq('business_id',business.id).eq('status','pending'):q));}
+window.loadDashboard=async()=>{if(!business)return;try{const[d,rv,pr]=await Promise.all([api('ads-overview',{method:'GET'}),count('reviews'),count('products')]);const n=d.summary?.naver||{},pending=d.approval_actions||[];$('dNaverCost').textContent=money(n.cost_krw||0);$('dClicks').textContent=fmt(d.summary?.total_clicks||0);$('dPending').textContent=fmt(pending.length);$('dReviews').textContent=fmt(rv);$('dProducts').textContent=fmt(pr);$('dHeadline').textContent=pending.length?`사장 승인 ${pending.length}건이 기다리고 있습니다.`:'오늘은 큰 변경 필요가 없습니다.';$('dSummary').textContent=pending.length?'광고 지휘센터 보고서에서 근거를 보고 OK / NO만 결정하면 됩니다.':'광고비서가 데이터를 확인 중이며, 확정 제안이 없으면 유지가 기본입니다.';$('dConnections').innerHTML=(d.connections||[]).map(x=>`<div class="rowcard"><div class="kpi"><b>${esc(({naver_ads:'NAVER Search Ads',google_ads:'Google Ads',google_business:'Google Business'})[x.provider]||x.provider)}</b><span class="pill ${x.status==='connected'?'ok':''}">${x.status==='connected'?'연결됨':'설정 필요'}</span></div><small>${esc(x.account_name||x.account_id||'미연결')}</small></div>`).join('')||'<div class="empty">연결 정보 없음</div>';const terms=(d.search_terms||[]).filter(x=>x.platform==='naver_ads').sort((a,b)=>Number(b.clicks||0)-Number(a.clicks||0)).slice(0,5);$('dTerms').innerHTML=terms.length?terms.map(x=>`<div class="rowcard"><div class="kpi"><b>${esc(x.search_term)}</b><span class="v">${fmt(x.clicks)}클릭</span></div><small>노출 ${fmt(x.impressions)} · 비용 ${money(x.cost_krw)}</small></div>`).join(''):'<div class="empty">검색어 동기화 후 표시됩니다.</div>';$('dIdeas').innerHTML=(d.recommendations||[]).slice(0,5).map(x=>`<div class="rowcard"><b>${esc(x.title||'AI 제안')}</b><small>${esc(x.recommendation||x.rationale||'')}</small></div>`).join('')||'<div class="empty">현재 긴급 AI 제안 없음</div>'}catch(e){$('dSummary').textContent='대시보드 일부 데이터를 불러오지 못했습니다: '+e.message}}
 
-window.openTab=(id)=>{document.querySelectorAll('.section').forEach(x=>x.classList.toggle('active',x.id===id));document.querySelectorAll('.nav button').forEach(x=>x.classList.toggle('active',x.dataset.tab===id));if(id==='products')loadProducts()};
-document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>openTab(b.dataset.tab));
-$('openTp').onclick=()=>window.open($('tpUrl').value,'_blank');
+window.loadAgent=async()=>{if(!business)return;const[{data:ideas},{data:actions}]=await Promise.all([sb.from('ai_recommendations').select('*').eq('business_id',business.id).order('created_at',{ascending:false}).limit(30),sb.from('approval_actions').select('*').eq('business_id',business.id).order('created_at',{ascending:false}).limit(30)]);$('agentIdeas').innerHTML=(ideas||[]).map(x=>`<div class="rowcard"><div class="kpi"><b>${esc(x.title||x.recommendation_type||'AI 추천')}</b><span class="pill ${String(x.status).toLowerCase()==='pending'?'gold':'ok'}">${esc(x.status||'')}</span></div><small>${esc(x.recommendation||x.rationale||x.summary||'')}</small></div>`).join('')||'<div class="empty">아직 AI 추천 기록이 없습니다.</div>';$('agentActions').innerHTML=(actions||[]).map(x=>`<div class="rowcard"><div class="kpi"><b>${esc(x.action_type||'작업')}</b><span class="pill ${String(x.status).toLowerCase()==='pending'?'gold':'ok'}">${esc(x.status||'')}</span></div><small>${esc(JSON.stringify(x.requested_payload||{}))}</small>${String(x.status).toLowerCase()==='pending'?'<button class="btn" style="margin-top:9px;width:100%" onclick="openTab(\'ads\')">광고 지휘센터에서 결정</button>':''}</div>`).join('')||'<div class="empty">승인 기록이 없습니다.</div>'}
 
-$('analyzeBtn').onclick=async()=>{
-  if(!business)return;
-  const raw=$('rawText').value.trim(); if(raw.length<100){setSync('인어교주 메뉴 내용을 충분히 붙여넣어 주세요.',false);return}
-  setSync('1/3 원문 저장 중...',true); $('analyzeBtn').disabled=true; $('applyBtn').classList.add('hidden'); $('analysisCard').classList.add('hidden');
-  const {data:imp,error:e1}=await sb.from('source_imports').insert({business_id:business.id,source_platform:'tpirates',source_url:$('tpUrl').value,raw_text:raw}).select('id').single();
-  if(e1){setSync('저장 실패: '+e1.message,false);$('analyzeBtn').disabled=false;return}
-  currentImportId=imp.id; setSync('2/3 OpenAI가 상품을 분석 중...',true);
-  const {data,error}=await sb.functions.invoke('parse-tpirates-menu',{body:{source_import_id:currentImportId}});
-  $('analyzeBtn').disabled=false;
-  if(error||!data?.success){setSync('AI 분석 실패: '+(data?.error||error?.message||'알 수 없는 오류'),false);return}
-  renderAnalysis(data.products||[]); $('detected').textContent=`· ${data.detected_products}개 상품 발견`; $('analysisCard').classList.remove('hidden'); $('applyBtn').classList.remove('hidden'); setSync('3/3 분석 완료. 결과를 확인하고 DB 반영을 누르세요.',true);
-};
+async function fetchOpenApi(){if(openApiSpec)return openApiSpec;const s=await sess();const r=await fetch(`${URL}/rest/v1/`,{headers:{apikey:KEY,Authorization:`Bearer ${s.access_token}`,Accept:'application/openapi+json'}});if(!r.ok)throw new Error('DB 스키마 조회 실패');openApiSpec=await r.json();return openApiSpec}
+async function schemaFor(table){try{const spec=await fetchOpenApi();return spec.definitions?.[table]||spec.components?.schemas?.[table]||null}catch{return null}}
+function propName(schema,candidates){const p=schema?.properties||{};return candidates.find(k=>Object.prototype.hasOwnProperty.call(p,k))||null}
+function valFrom(row,candidates,fallback='—'){for(const k of candidates){if(row?.[k]!==undefined&&row?.[k]!==null&&row?.[k]!=='')return row[k]}return fallback}
 
-$('applyBtn').onclick=async()=>{if(!currentImportId)return; $('applyBtn').disabled=true;setSync('상품 DB에 반영 중...',true);const {data,error}=await sb.functions.invoke('apply-tpirates-products',{body:{source_import_id:currentImportId}});$('applyBtn').disabled=false;if(error||!data?.success){setSync('반영 실패: '+(data?.error||error?.message||'알 수 없는 오류'),false);return}setSync(`${data.applied_products}개 상품을 DB에 반영했습니다.`,true);await Promise.all([loadProducts(),loadCounts()]);};
-function setSync(t,ok){$('syncStatus').textContent=t;$('syncStatus').className='status '+(ok?'ok':'err')}
-function renderAnalysis(items){$('analysisProducts').innerHTML=items.map(p=>`<div class="prod"><div><b>${escapeHtml(p.name)}</b><small>${escapeHtml(p.category||'분류 없음')} · 리뷰 ${fmt(p.review_count)}</small></div><div class="price">${p.min_price?fmt(p.min_price)+'원':'가격 미상'}</div><span class="pill ${p.stock_status==='sold_out'?'sold':''}">${p.stock_status==='sold_out'?'품절':'판매'}</span></div>`).join('')||'<div class="empty">상품을 찾지 못했습니다.</div>'}
-window.loadProducts=async()=>{if(!business)return;const {data,error}=await sb.from('products').select('name,category,current_price,review_count,popularity_rank,stock_status,option_data').eq('business_id',business.id).eq('source_platform','tpirates').order('popularity_rank',{ascending:true,nullsFirst:false}).order('name'); if(error){$('productList').innerHTML='<div class="empty">'+escapeHtml(error.message)+'</div>';return} $('productList').innerHTML=(data||[]).map(p=>`<div class="prod"><div><b>${escapeHtml(p.name)}</b><small>${escapeHtml(p.category||'')} ${p.popularity_rank?'· 인기 '+p.popularity_rank+'위':''} · 리뷰 ${fmt(p.review_count)}</small></div><div class="price">${p.current_price?fmt(p.current_price)+'원~':'—'}</div><span class="pill ${p.stock_status==='sold_out'?'sold':''}">${p.stock_status==='sold_out'?'품절':'판매중'}</span></div>`).join('')||'<div class="empty">아직 동기화된 상품이 없습니다. “인어교주 동기화”에서 시작하세요.</div>'};
-function escapeHtml(s){return String(s??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}
+async function fillProducts(){if(!business)return;const{data}=await sb.from('products').select('id,name,stock_status').eq('business_id',business.id).order('name');$('invProduct').innerHTML=(data||[]).map(p=>`<option value="${p.id}">${esc(p.name)}</option>`).join('')||'<option value="">상품 DB가 비어 있습니다</option>'}
+window.loadInventory=async()=>{if(!business)return;await fillProducts();const{data,error}=await sb.from('daily_inventory').select('*').eq('business_id',business.id).order('created_at',{ascending:false}).limit(40);if(error){$('inventoryList').innerHTML=`<div class="empty">${esc(error.message)}</div>`;return}$('inventoryList').innerHTML=(data||[]).map(x=>`<div class="rowcard"><div class="kpi"><b>${esc(valFrom(x,['product_name','item_name','name'],'수산물 기록'))}</b><span class="pill">${esc(valFrom(x,['stock_status','status'],'기록'))}</span></div><small>${esc(valFrom(x,['note','notes','memo','condition_note'],'메모 없음'))}<br>상태 ${esc(valFrom(x,['condition_score','quality_score'],'—'))} · 재고 ${esc(valFrom(x,['stock_level','stock_qty','quantity','stock_quantity'],'—'))} · 원가 ${money(Number(valFrom(x,['cost_price','unit_cost','cost'],0)))}</small></div>`).join('')||'<div class="empty">아직 오늘의 수산물 기록이 없습니다.<br>왼쪽에서 첫 기록을 저장해 주세요.</div>'}
+$('saveInvBtn').onclick=async()=>{if(!business)return;const b=$('saveInvBtn'),old=b.textContent;b.disabled=true;b.textContent='저장 중...';try{const schema=await schemaFor('daily_inventory'),payload={};const set=(cands,v)=>{const k=propName(schema,cands);if(k&&v!==''&&v!==undefined&&v!==null)payload[k]=v};set(['business_id'],business.id);set(['product_id'],$('invProduct').value);set(['inventory_date','record_date','snapshot_date','date'],new Date().toISOString().slice(0,10));set(['stock_status','status'],$('invStatus').value);set(['condition_score','quality_score'],Number($('invScore').value||0));set(['stock_level','stock_qty','quantity','stock_quantity'],Number($('invQty').value||0));set(['cost_price','unit_cost','cost'],Number(String($('invCost').value).replace(/,/g,'')||0));set(['note','notes','memo','condition_note'],$('invNote').value.trim());if(!Object.keys(payload).length)throw new Error('daily_inventory DB 구조를 확인할 수 없습니다.');const{error}=await sb.from('daily_inventory').insert(payload);if(error)throw error;$('invStatusMsg').textContent='DB에 저장했습니다.';$('invStatusMsg').className='status ok';$('invNote').value='';await loadInventory()}catch(e){$('invStatusMsg').textContent='저장 확인 필요: '+e.message;$('invStatusMsg').className='status err'}finally{b.disabled=false;b.textContent=old}}
+
+window.loadReviews=async()=>{if(!business)return;const{data,error}=await sb.from('reviews').select('*').eq('business_id',business.id).order('created_at',{ascending:false}).limit(100);if(error){$('reviewList').innerHTML=`<div class="empty">${esc(error.message)}</div>`;return}const a=data||[],ratings=a.map(x=>Number(valFrom(x,['rating','stars'],0))).filter(Boolean);$('rvCount').textContent=fmt(a.length);$('rvAvg').textContent=ratings.length?(ratings.reduce((s,v)=>s+v,0)/ratings.length).toFixed(1):'—';$('rvPending').textContent=fmt(a.filter(x=>String(valFrom(x,['reply_status','status'],'')).includes('pending')).length);$('rvNegative').textContent=fmt(a.filter(x=>Number(valFrom(x,['rating','stars'],5))<=2||String(valFrom(x,['sentiment'],'')).toLowerCase()==='negative').length);$('reviewList').innerHTML=a.map(x=>`<div class="rowcard"><div class="kpi"><b>${esc(valFrom(x,['reviewer_name','author_name'],'고객'))} · ${esc(valFrom(x,['platform'],'review'))}</b><span class="pill gold">${Number(valFrom(x,['rating','stars'],0))?'★'.repeat(Math.round(Number(valFrom(x,['rating','stars'],0)))):'평점 없음'}</span></div><small>${esc(valFrom(x,['review_text','text','content'],'평점만 남긴 리뷰'))}${valFrom(x,['ai_summary','summary'],'')?'<br><br>AI: '+esc(valFrom(x,['ai_summary','summary'],'')):''}</small></div>`).join('')||'<div class="empty">아직 리뷰 DB가 비어 있습니다.</div>'}
+
+window.loadContent=async()=>{if(!business)return;const{data,error}=await sb.from('content_drafts').select('*').eq('business_id',business.id).order('created_at',{ascending:false}).limit(60);if(error){$('contentList').innerHTML=`<div class="empty">${esc(error.message)}</div>`;return}$('contentList').innerHTML=(data||[]).map(x=>`<div class="rowcard"><div class="kpi"><b>${esc(valFrom(x,['title','headline'],'콘텐츠 초안'))}</b><span class="pill">${esc(valFrom(x,['platform','channel'],'content'))}</span></div><small>${esc(valFrom(x,['body','content','draft_text','caption'],'내용 없음'))}</small></div>`).join('')||'<div class="empty">아직 저장된 콘텐츠 초안이 없습니다.</div>'}
+$('saveContentBtn').onclick=async()=>{if(!business)return;const b=$('saveContentBtn'),old=b.textContent;b.disabled=true;b.textContent='저장 중...';try{const schema=await schemaFor('content_drafts'),payload={};const set=(cands,v)=>{const k=propName(schema,cands);if(k&&v!==''&&v!==undefined&&v!==null)payload[k]=v};set(['business_id'],business.id);set(['platform','channel'],$('ctPlatform').value);set(['content_type','type'],'draft');set(['title','headline'],$('ctTitle').value.trim()||'지원이네 콘텐츠 초안');set(['body','content','draft_text','caption'],$('ctBody').value.trim());set(['status'],'draft');if(!Object.keys(payload).length)throw new Error('content_drafts DB 구조를 확인할 수 없습니다.');const{error}=await sb.from('content_drafts').insert(payload);if(error)throw error;$('contentStatus').textContent='콘텐츠 초안을 DB에 저장했습니다.';$('contentStatus').className='status ok';$('ctTitle').value='';$('ctBody').value='';await loadContent()}catch(e){$('contentStatus').textContent='저장 확인 필요: '+e.message;$('contentStatus').className='status err'}finally{b.disabled=false;b.textContent=old}}
+
+window.loadProducts=async()=>{if(!business)return;const{data,error}=await sb.from('products').select('*').eq('business_id',business.id).order('name');if(error){$('productList').innerHTML=`<div class="empty">${esc(error.message)}</div>`;return}$('productList').innerHTML=(data||[]).map(p=>`<div class="prod"><div><b>${esc(p.name)}</b><small>${esc(p.category||'')} ${p.popularity_rank?'· 인기 '+p.popularity_rank+'위':''} · 리뷰 ${fmt(p.review_count)}</small></div><div class="price">${p.current_price?money(p.current_price)+'~':'—'}</div><span class="pill ${p.stock_status==='sold_out'?'':'ok'}">${p.stock_status==='sold_out'?'품절':'판매중'}</span></div>`).join('')||'<div class="empty">아직 상품 DB가 비어 있습니다.<br>인어교주 동기화에서 실제 메뉴를 가져오세요.</div>'}
+
+$('openTp').onclick=()=>window.open($('tpUrl').value,'_blank');$('analyzeBtn').onclick=async()=>{if(!business)return;const raw=$('rawText').value.trim();if(raw.length<100){setSync('인어교주 메뉴 내용을 충분히 붙여넣어 주세요.',false);return}const b=$('analyzeBtn'),old=b.textContent;b.disabled=true;b.textContent='AI 분석 중...';$('applyBtn').classList.add('hidden');$('analysisCard').classList.add('hidden');try{const{data:imp,error:e1}=await sb.from('source_imports').insert({business_id:business.id,source_platform:'tpirates',source_url:$('tpUrl').value,raw_text:raw}).select('id').single();if(e1)throw e1;currentImportId=imp.id;const{data,error}=await sb.functions.invoke('parse-tpirates-menu',{body:{source_import_id:currentImportId}});if(error||!data?.success)throw new Error(data?.error||error?.message||'AI 분석 실패');renderAnalysis(data.products||[]);$('detected').textContent=`· ${data.detected_products}개 상품`;$('analysisCard').classList.remove('hidden');$('applyBtn').classList.remove('hidden');setSync('분석 완료. 확인 후 DB 반영을 누르세요.',true)}catch(e){setSync(e.message,false)}finally{b.disabled=false;b.textContent=old}};$('applyBtn').onclick=async()=>{if(!currentImportId)return;const b=$('applyBtn'),old=b.textContent;b.disabled=true;b.textContent='DB 반영 중...';try{const{data,error}=await sb.functions.invoke('apply-tpirates-products',{body:{source_import_id:currentImportId}});if(error||!data?.success)throw new Error(data?.error||error?.message||'반영 실패');setSync(`${data.applied_products}개 상품을 DB에 반영했습니다.`,true);await loadProducts()}catch(e){setSync(e.message,false)}finally{b.disabled=false;b.textContent=old}};function setSync(t,ok){$('syncStatus').textContent=t;$('syncStatus').className='status '+(ok?'ok':'err')}function renderAnalysis(items){$('analysisProducts').innerHTML=items.map(p=>`<div class="prod"><div><b>${esc(p.name)}</b><small>${esc(p.category||'분류 없음')} · 리뷰 ${fmt(p.review_count)}</small></div><div class="price">${p.min_price?money(p.min_price):'가격 미상'}</div><span class="pill ${p.stock_status==='sold_out'?'':'ok'}">${p.stock_status==='sold_out'?'품절':'판매'}</span></div>`).join('')||'<div class="empty">상품을 찾지 못했습니다.</div>'}
 init();
 </script>
 </body>
